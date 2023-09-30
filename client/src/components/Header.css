@@ -1,0 +1,90 @@
+.Height-appl {
+  height: 99px;
+  /* content: "";
+   background-image: url('../images/back3.png'); 
+   background-color: rgba(0, 0,0 ,0.57);
+  background-blend-mode: darken;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute; */ 
+}
+
+.spacin {
+  margin-right: 30px;
+}
+
+.marginleft{
+  margin-left: 30px;
+  margin-right: -40px;
+}
+
+.margin-spac {
+  display: flex;
+  align-items: center;
+  margin: 4px auto;
+}
+
+.margin-spac input {
+  width: 400px;
+}
+
+.logo-containe {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  /* position: relative; */
+  /* margin-top: 38px; */
+}
+
+.logo-containe img {
+  height: 100%; 
+}
+
+.logo-tex {
+  margin-left: -15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-text-lin1 {
+  margin-left: -10px;
+  font-size: 28px;
+}
+
+.logo-text-lin2 {
+  font-size: 24px;
+  margin-left: 5px;
+}
+
+.Selecting {
+  padding: 9px;
+  font-size: 15px;
+  border: solid 1px white;
+  border-radius: 12px;
+  outline: none;
+  background: transparent;
+  font-size: 16px;
+  color: rgb(0, 0, 0);
+  background-color: white;
+}
+
+.tabs{
+  margin-top: -5px;
+}
+.posting{
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  font-size: 20px;
+  padding: 18px;
+  border-radius: 8px;
+  border: none;
+  margin-top: 10px;
+}
+
+.posting img{
+  width: 32px;
+}

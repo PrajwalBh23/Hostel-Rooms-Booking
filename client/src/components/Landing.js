@@ -4,7 +4,7 @@ import logo from '../images/Logo5.png';
 import HeadsetMicRoundedIcon from '@mui/icons-material/HeadsetMicRounded';
 import Dropdown from './Dropdown.js';
 import './Landing.css';
-import SearchBar from './Search_bar';
+// import './Search.css';
 
 import { NavLink } from 'react-router-dom';
 import { brown } from '@mui/material/colors';
@@ -27,8 +27,8 @@ function Header() {
                     </Typography>
 
                     <Tabs sx={{ ml: "auto" }}>
-                        <Tab LinkComponent={NavLink} to="/add" icon={<HeadsetMicRoundedIcon style={{ color: 'white' }}/>} />
-                        <Tab LinkComponent={NavLink} to="/add" icon={<Dropdown style={{ color: 'white' }}/>} />
+                        <Tab LinkComponent={NavLink} to="/add" icon={<HeadsetMicRoundedIcon style={{ color: 'white' }} />} />
+                        <Tab LinkComponent={NavLink} to="/add" icon={<Dropdown style={{ color: 'white' }} />} />
                     </Tabs>
                 </Toolbar>
 
@@ -44,7 +44,17 @@ function Header() {
                     <Tabs sx={{ m: "auto" }} >
                         <h2 sx={{ m: 'auto' }} className='slo_text'>Where comfort meets community and student find thier second home</h2>
                     </Tabs>
-                <SearchBar/>
+                    <div className="search-bar">
+                        <select className="select-option">
+                            <option value="option1">College</option>
+                            <option value="option2">Area</option>
+                        </select>
+
+                        <div className="search-container">
+                            <input type="text" placeholder="Search..." />
+                            <button className='but'>Search</button>
+                        </div>
+                    </div>
                 </Toolbar>
                 <br />
             </AppBar>
