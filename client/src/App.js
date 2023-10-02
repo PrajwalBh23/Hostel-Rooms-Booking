@@ -1,7 +1,8 @@
 import React from "react";
 import Landing from "./components/Landing";
 import { Route, Routes } from "react-router-dom";
-import Header from "./components/Header";
+import Rooms from "./components/Rooms";
+import Hostel from "./components/Hostel";
 import './App.css';
 
 function App() {
@@ -9,7 +10,8 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Landing />} exact />
-        <Route path="/result" element={<Header />} exact />
+        <Route path="/rooms" element={<Rooms />} exact />
+        <Route path="/hostels" element={<Hostel />} exact />
       </Routes>
     </>
   );

@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-const hotelSchema = new Schema({
+const roomSchema = new Schema({
     name:{
         type: String,
         required: true
@@ -64,4 +64,4 @@ const hotelSchema = new Schema({
 // hotelSchema.index({ name:'text', description : 'text' })
 
 
-export default mongoose.model("Hotel",hotelSchema);
+export default mongoose.model("Room",roomSchema);

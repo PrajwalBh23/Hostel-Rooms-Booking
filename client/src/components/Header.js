@@ -4,7 +4,7 @@ import logo from '../images/Logo5.png';
 import HeadsetMicRoundedIcon from '@mui/icons-material/HeadsetMicRounded';
 import Dropdown from './Dropdown.js';
 import './Header.css';
-import SearchBar from './Search_Bar';
+// import './Search_Bar.css';
 
 import { NavLink } from 'react-router-dom';
 // import { brown } from '@mui/material/colors';
@@ -29,13 +29,23 @@ function Header() {
                         </Typography>
                     </div>
                     <div className='marginleft'>
-                            <select className='Selecting'>
-                                <option value="option1">Rooms / Flats</option>
-                                <option value="option2">Hostels</option>
-                            </select>
-                        </div>
+                        <select className='Selecting'>
+                            <option value="option1">Rooms / Flats</option>
+                            <option value="option2">Hostels</option>
+                        </select>
+                    </div>
                     <div className='margin-spac'>
-                        <SearchBar />
+                        <div className="search-ba">
+                            <select className="select-optio">
+                                <option value="option1">College</option>
+                                <option value="option2">Area</option>
+                            </select>
+
+                            <div className="search-containe">
+                                <input type="text" placeholder="Search..." />
+                                <button className='butt'>Search</button>
+                            </div>
+                        </div>
                     </div>
                     <div>
                         <Tabs sx={{ ml: "auto" }}>
@@ -44,13 +54,6 @@ function Header() {
                             <Tab LinkComponent={NavLink} to="/add" icon={<Dropdown style={{ color: 'white' }} />} />
                         </Tabs></div>
                 </Toolbar>
-
-                {/* <Toolbar>
-                    <Tabs sx={{ m: "auto" }} className='tabs' textColor='inherit' indicatorColor='primary' value={value} onChange={(e, val) => setValue(val)}>
-                        <Tab LinkComponent={NavLink} style={{ fontSize: 20, color: { brown }, marginLeft: '50px', marginRight: '20px', fontWeight: 'bold' }} to="/add" label='Rooms/Flats' />
-                        <Tab LinkComponent={NavLink} style={{ fontSize: 20, color: { brown }, marginRight: '20px', fontWeight: 'bold' }} to="/add" label='Hostels' />
-                    </Tabs>
-                </Toolbar> */}
             </AppBar>
         </>
     )

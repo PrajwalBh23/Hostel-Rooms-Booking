@@ -1,12 +1,12 @@
 import express from 'express';
-import { getAllHotels, addHotels, updateHotel, delectHotel } from '../controllers/controller.js'; 
+import { getAllRooms, addRooms, updateRoom, delectRoom } from '../controllers/controller.js'; 
 
 const router = express.Router();
 
-router.get("/", getAllHotels);
-router.post("/", addHotels)
+router.get("/", getAllRooms);
+router.post("/", addRooms)
 // router.get("/:id", getbyID)
-router.put('/:id', updateHotel)
-router.delete('/:id', delectHotel)
+router.put('/:id', updateRoom)
+router.delete('/:id', delectRoom)
 
 export default router; 

@@ -1,46 +1,46 @@
-import Hotel from '../model/Owner.js';
-import jwt from 'jsonwebtoken';
+import Room from '../model/Owner.js';
+// import jwt from 'jsonwebtoken';
 
-export const getAllHotels = async (req, res, next) => {
-    let hotels;
+export const getAllRooms = async (req, res, next) => {
+    let rooms;
     try {
-        hotels = await Hotel.find();
+        rooms = await Room.find();
     } catch (err) {
         console.log(err);
         res.send("Hello Guys")
     }
 
-    if (!hotels) {
+    if (!rooms) {
         return res.status(404).json({ message: "No message found" });
     }
-    return res.status(200).json({ hotels });
+    return res.status(200).json({ rooms });
 }
 
-export const addHotels = async (req, res) => {
-    const NewHotel = new Hotel(req.body)
+export const addRooms = async (req, res) => {
+    const NewRoom = new Room(req.body)
     try {
-        const savedHotel = await NewHotel.save()
-        res.status(200).json(savedHotel);
+        const savedRoom = await NewRoom.save()
+        res.status(200).json(savedRoom);
     } catch (error) {
         res.status(500).json({error: error});
     }
 }
 
-export const updateHotel = async (req, res) => {
+export const updateRoom = async (req, res) => {
 
     try {
-        const UpdateHotel = await Hotel.findByIdAndUpdate(req.params.id, {$set: req.body})
-        res.status(200).json(UpdateHotel);
+        const UpdateRoom = await Room.findByIdAndUpdate(req.params.id, {$set: req.body})
+        res.status(200).json(UpdateRoom);
     } catch (error) {
         res.status(500).json({error: error});
     }
 }
 
-export const delectHotel = async (req, res) => {
+export const delectRoom = async (req, res) => {
 
     try {
-        await Hotel.findByIdAndDelete(req.params.id)
-        res.status(200).json("Hotel is delect");
+        await Room.findByIdAndDelete(req.params.id)
+        res.status(200).json("Room is delect");
     } catch (error) {
         res.status(500).json({error: error});
     }
