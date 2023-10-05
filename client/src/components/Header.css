@@ -1,5 +1,5 @@
 .Height-appl {
-  height: 99px;
+  height: 12%;
   /* content: "";
    background-image: url('../images/back3.png'); 
    background-color: rgba(0, 0,0 ,0.57);
@@ -23,7 +23,7 @@
 }
 
 .logo-containe img {
-  height: 100%;
+  margin-top: 3%;
 }
 
 .logo-tex {
@@ -40,10 +40,6 @@
 .logo-text-lin2 {
   font-size: 24px;
   margin-left: 5px;
-}
-
-.marginleft {
-  /* margin-right: -0px; */
 }
 
 .Selecting {
@@ -65,7 +61,7 @@
 }
 
 .margin-spac input {
-  width: 350px;
+  width: 340px;
 }
 
 .search-ba {
@@ -97,7 +93,6 @@
   /* margin-left: 10px; */
   flex-grow: 1;
   height: 30px;
-  width: 400px;
 }
 
 input[type="text"] {
@@ -137,10 +132,10 @@ i {
   justify-content: center;
   height: 30px;
   font-size: 20px;
-  padding: 18px;
+  padding: 5%;
   border-radius: 8px;
   border: none;
-  margin-top: 10px;
+  margin-top: 16px;
 }
 
 

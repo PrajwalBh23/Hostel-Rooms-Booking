@@ -5,6 +5,7 @@ import Header from './Header.js';
 import './Rooms.css';
 import Checkbox from '@mui/material/Checkbox';
 import house from '../images/House_sample.jpg'
+import map from '../images/map1.jpeg'
 import VerifiedRoundedIcon from '@mui/icons-material/VerifiedRounded';
 
 function Rooms() {
@@ -16,8 +17,8 @@ function Rooms() {
             <div>
                 <Box display="flex" marginTop="7%" width="100%" flexDirection="row">
                     <Typography sx={{ fontFamily: "fantasy" }} width={"25%"}>
-                        <div className="filter">
-                            <div className="main">Filters</div>
+                        <div className="filter"> 
+                            <div className="main"><h2>Filters</h2></div>
                             <div className="contain">
                                 <div className="head">Property Type</div>
                                 <ul>
@@ -56,44 +57,235 @@ function Rooms() {
                                     <li><Checkbox {...label} />Water</li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> 
                     </Typography>
                     <Typography sx={{ fontFamily: "fantasy" }} width={"75%"} variant="h2">
-                        <div className="result">
+                        
+                        
+                        {/* 1  */}
+                        <div className="result"> 
                             <div className="box">
                                 <img src={house} alt="not showing" />
                                 <div className="info">
                                     <div className="price">₹10000-12000</div>
                                     <div className="address">House No. 9 Mahada Colony, Butibori Nagpur</div>
+                            
                                     <div className="buttons">
-                                        <button>Shared +4</button>
-                                        <button>Semi-Furnished</button>
-                                        <button>Only Girls</button>
-                                    </div>
+                                        <button className='button2'>Shared +4</button>
+                                        <button className='button2'>Semi-Furnished</button>
+                                        <button className='button2'>Only Girls</button>
+                                        
+                                    </div> 
+                                    <br></br>
+                                    
                                     <div className="extra">2 Bedrooms with Separate Common Area & Seprate Washroom</div>
-                                    <div className="availablity">Available Now<button>10+ Years Experience</button></div>
+                                   
+                                    {/* <br></br> */}
+                                    <div className="availablity">Available Now</div>
+                                    <button className='button'>10+ Years Experience</button>
                                 </div>
                                 <div className="map">
-                                    <img src={house} alt="" />
+                                    <img src={map} alt="" />
                                 </div>
                             </div>
                             <div className="block">
-                                <div className="owner">
-                                    <span><VerifiedRoundedIcon /></span>
-                                    <span>Mansi Pillewan</span>
-                                </div>
-                                <div className="corner">
-                                    <span>View More</span>
+                                
+                                    <div className="owner">
+                                    
+                                        <span><VerifiedRoundedIcon /></span>
+                                        <span className='inner-block'>Mansi Pillewan</span>
+                                        
+                                    </div>
+                                   
+                                    <div className="corner">
+                                        <ul>
+                                            <a href="/" className='noUnderline'>View More</a>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                                
+                       
+                        
+
+                        {/* 2 */}
+                        <div className="result"> 
+                            <div className="box">
+                                <img src={house} alt="not showing" />
+                                <div className="info">
+                                    <div className="price">₹10000-12000</div>
+                                    <div className="address">House No. 9 Mahada Colony, Butibori Nagpur</div>
+                            
+                                    <div className="buttons">
+                                        <button className='button2'>Shared +4</button>
+                                        <button className='button2'>Semi-Furnished</button>
+                                        <button className='button2'>Only Girls</button>
+                                        
+                                    </div> 
+                                    <br></br>
+                                    
+                                    <div className="extra">2 Bedrooms with Separate Common Area & Seprate Washroom</div>
+                                   
+                                    {/* <br></br> */}
+                                    <div className="availablity">Available Now</div>
+                                    <button className='button'>10+ Years Experience</button>
+                                </div>
+                                <div className="map">
+                                    <img src={map} alt="" />
+                                </div>
+                            </div>
+                            <div className="block">
+                                
+                                    <div className="owner">
+                                    
+                                        <span><VerifiedRoundedIcon /></span>
+                                        <span className='inner-block'>Mansi Pillewan</span>
+                                        
+                                    </div>
+                                   
+                                    <div className="corner">
+                                        <ul>
+                                            <a href="/" className='noUnderline'>View More</a>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        {/* 3 */}
+                        <div className="result"> 
+                            <div className="box">
+                                <img src={house} alt="not showing" />
+                                <div className="info">
+                                    <div className="price">₹10000-12000</div>
+                                    <div className="address">House No. 9 Mahada Colony, Butibori Nagpur</div>
+                            
+                                    <div className="buttons">
+                                        <button className='button2'>Shared +4</button>
+                                        <button className='button2'>Semi-Furnished</button>
+                                        <button className='button2'>Only Girls</button>
+                                        
+                                    </div> 
+                                    <br></br>
+                                    
+                                    <div className="extra">2 Bedrooms with Separate Common Area & Seprate Washroom</div>
+                                   
+                                    {/* <br></br> */}
+                                    <div className="availablity">Available Now</div>
+                                    <button className='button'>10+ Years Experience</button>
+                                </div>
+                                <div className="map">
+                                    <img src={map} alt="" />
+                                </div>
+                            </div>
+                            <div className="block">
+                                
+                                    <div className="owner">
+                                    
+                                        <span><VerifiedRoundedIcon /></span>
+                                        <span className='inner-block'>Mansi Pillewan</span>
+                                        
+                                    </div>
+                                   
+                                    <div className="corner">
+                                        <ul>
+                                            <a href="/" className='noUnderline'>View More</a>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        {/* 4 */}
+                        <div className="result"> 
+                            <div className="box">
+                                <img src={house} alt="not showing" />
+                                <div className="info">
+                                    <div className="price">₹10000-12000</div>
+                                    <div className="address">House No. 9 Mahada Colony, Butibori Nagpur</div>
+                            
+                                    <div className="buttons">
+                                        <button className='button2'>Shared +4</button>
+                                        <button className='button2'>Semi-Furnished</button>
+                                        <button className='button2'>Only Girls</button>
+                                        
+                                    </div> 
+                                    <br></br>
+                                    
+                                    <div className="extra">2 Bedrooms with Separate Common Area & Seprate Washroom</div>
+                                   
+                                    <div className="availablity">Available Now</div>
+                                    <button className='button'>10+ Years Experience</button>
+                                </div>
+                                <div className="map">
+                                    <img src={map} alt="" />
+                                </div>
+                            </div>
+                            <div className="block">
+                                
+                                    <div className="owner">
+                                    
+                                        <span><VerifiedRoundedIcon /></span>
+                                        <span className='inner-block'>Mansi Pillewan</span>
+                                        
+                                    </div>
+                                   
+                                    <div className="corner">
+                                        <ul>
+                                            <a href="/" className='noUnderline'>View More</a>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        
+
+                        {/* 5 */}
+                        <div className="result"> 
+                            <div className="box">
+                                <img src={house} alt="not showing" />
+                                <div className="info">
+                                    <div className="price">₹10000-12000</div>
+                                    <div className="address">House No. 9 Mahada Colony, Butibori Nagpur</div>
+                            
+                                    <div className="buttons">
+                                        <button className='button2'>Shared +4</button>
+                                        <button className='button2'>Semi-Furnished</button>
+                                        <button className='button2'>Only Girls</button>
+                                        
+                                    </div> 
+                                    <br></br>
+                                    
+                                    <div className="extra">2 Bedrooms with Separate Common Area & Seprate Washroom</div>
+                                   
+                                    {/* <br></br> */}
+                                    <div className="availablity">Available Now</div>
+                                    <button className='button'>10+ Years Experience</button>
+                                </div>
+                                <div className="map">
+                                    <img src={map} alt="" />
+                                </div>
+                            </div>
+                            <div className="block">
+                                
+                                    <div className="owner">
+                                    
+                                        <span><VerifiedRoundedIcon /></span>
+                                        <span className='inner-block'>Mansi Pillewan</span>
+                                        
+                                    </div>
+                                   
+                                    <div className="corner">
+                                        <ul>
+                                            <a href="/" className='noUnderline'>View More</a>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        {/* </div>        */}
+                       
                     </Typography>
                 </Box>
-
             </div>
         </>
     )
 }
 
 export default Rooms;
-

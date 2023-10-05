@@ -11,6 +11,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
+
 const StyledMenu = styled((props) => (
     <Menu
         elevation={0}
@@ -52,7 +53,7 @@ const StyledMenu = styled((props) => (
     },
 }));
 
-export default function CustomizedMenus() {
+export default function CustomizedMenus({ fontSize }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -72,8 +73,9 @@ export default function CustomizedMenus() {
                 variant="contained"
                 disableElevation
                 onMouseEnter ={handleClick}
-                startIcon={<AccountCircleIcon />}
-                endIcon={<KeyboardArrowDownIcon />}
+                style={{ marginLeft:'-20px' }}
+                startIcon={<AccountCircleIcon style={{ fontSize: fontSize }} />}
+                endIcon={<KeyboardArrowDownIcon style={{ fontSize: fontSize }} />}
             >
             </Button>
             <StyledMenu

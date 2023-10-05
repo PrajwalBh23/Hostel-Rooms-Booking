@@ -92,16 +92,16 @@
 }
 
 .result img{
-    width: 350px;
-    height: 200px;
-    border-radius: 12px; 
+  width: 32%;
+  height: 100%;
+  border-radius: 11%;
 }
 .box{
-    height: 250px;
-    color: black;
-    display: flex;
-    flex-direction: row;
-    background-color: blueviolet;
+  height: 250px;
+  color: black;
+  display: flex;
+  flex-direction: row;
+  background-color: cornsilk;
   }
 
   .info{
@@ -112,7 +112,8 @@
     display: flex;
   }
   .map img{
-    width: 200px;
-    float: right;
+    width: 68%;
+    margin-right: 2%;
+    height: 74%;
   }
   

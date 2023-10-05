@@ -36,7 +36,7 @@ function Header() {
                         </select>
                     </div>
                     <div className='margin-spac'>
-                        <div className="search-ba">
+                        <div className="search-ba"> 
                             <select className="select-optio">
                                 <option value="option1">College</option>
                                 <option value="option2">Area</option>
@@ -50,9 +50,9 @@ function Header() {
                     </div>
                     <div>
                         <Tabs sx={{ ml: "auto" }}>
-                            <button className='posting'>Post Property <img style={{ marginLeft: "2px" }} src={free} alt="" /></button>
-                            <Tab LinkComponent={NavLink} to="/add" icon={<HeadsetMicRoundedIcon style={{ color: 'white' }} />} />
-                            <Tab icon={<CustomizedMenus  style={{ color: 'white' }} />} />
+                            <button className='posting'>Post Property <img style={{ marginLeft: "3px" }} src={free} alt="" /></button>
+                            <Tab LinkComponent={NavLink} to="/add" icon={<HeadsetMicRoundedIcon style={{ color: 'white', fontSize: '1.9rem'}} />} />
+                            <Tab icon={<CustomizedMenus fontSize="1.9rem" style={{ color: 'white' }} />} />
                         </Tabs>
                         </div>
                 </Toolbar>

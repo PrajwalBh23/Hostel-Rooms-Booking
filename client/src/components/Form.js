@@ -9,7 +9,7 @@ function Form({ formName }) { // Receive formName as a prop
             <Header />
             <Box className='Container' display="flex" marginTop="7%" width="100%" flexDirection="row">
                 <form id={formName}>
-                    <h1>{formName === 'form1' ? "Owner's Detail" : formName === 'form2' ? "Property Detail" : formName === 'form3' ? "Photos" : "Rental Room Facilities"}</h1>
+                    <h1>{formName === 'form1' ? "Owner's Detail" : formName === 'form2' ? "Property Detail" : formName === 'form3' ? "Photos" : formName === 'form4' ? "Rental Room Facilities" : "Verified User"}</h1>
                     <TextField helperText="Please enter your name" id="outlined-basic" label="Name" variant="outlined" />
                     <TextField helperText="Please enter Your Phone no." id="outlined-basic" label="Phone no." variant="outlined" />
                     <TextField helperText="Please enter Email id" id="outlined-basic" label="Enter Your Email id" variant="outlined" />
