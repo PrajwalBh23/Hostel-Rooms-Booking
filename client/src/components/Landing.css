@@ -14,7 +14,7 @@
 .Height-apply::before {
   content: "";
   background-image: url('../images/back3.png');
-  background-color: rgba(0, 0,0 ,0.18);
+  background-color: rgba(0, 0,0 ,0.2);
   background-blend-mode: darken;
   background-repeat: no-repeat;
   background-size: cover;

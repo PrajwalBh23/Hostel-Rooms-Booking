@@ -3,6 +3,8 @@ import Landing from "./components/Landing";
 import { Route, Routes } from "react-router-dom";
 import Rooms from "./components/Rooms";
 import Hostel from "./components/Hostel";
+import Adding from "./components/Adding";
+import Form from "./components/Form";
 import './App.css';
 
 function App() {
@@ -12,6 +14,8 @@ function App() {
         <Route path="/" element={<Landing />} exact />
         <Route path="/rooms" element={<Rooms />} exact />
         <Route path="/hostels" element={<Hostel />} exact />
+        <Route path="/add" element={<Adding />} exact />
+        <Route path="/form" element={<Form />} exact />
       </Routes>
     </>
   );

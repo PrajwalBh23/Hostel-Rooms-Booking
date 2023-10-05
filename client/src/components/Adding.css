@@ -1,0 +1,18 @@
+.Container{
+    
+}
+
+.add_cart{
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 180px;
+    flex-wrap: wrap;
+    border-radius: 18px;
+}
+.add_cart img{
+    height: 100%;
+    width: fit-content;
+}

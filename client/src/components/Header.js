@@ -2,7 +2,7 @@ import React from 'react';
 import { AppBar, Tabs, Tab, Toolbar, Typography } from '@mui/material';
 import logo from '../images/Logo5.png';
 import HeadsetMicRoundedIcon from '@mui/icons-material/HeadsetMicRounded';
-import Dropdown from './Dropdown.js';
+import CustomizedMenus from './Dropdown.js';
 import './Header.css';
 // import './Search_Bar.css';
 
@@ -30,8 +30,9 @@ function Header() {
                     </div>
                     <div className='marginleft'>
                         <select className='Selecting'>
-                            <option value="option1">Rooms / Flats</option>
+                            <option value="option1">Rooms</option>
                             <option value="option2">Hostels</option>
+                            <option value="option3">Flats</option>
                         </select>
                     </div>
                     <div className='margin-spac'>
@@ -51,8 +52,9 @@ function Header() {
                         <Tabs sx={{ ml: "auto" }}>
                             <button className='posting'>Post Property <img style={{ marginLeft: "2px" }} src={free} alt="" /></button>
                             <Tab LinkComponent={NavLink} to="/add" icon={<HeadsetMicRoundedIcon style={{ color: 'white' }} />} />
-                            <Tab LinkComponent={NavLink} to="/add" icon={<Dropdown style={{ color: 'white' }} />} />
-                        </Tabs></div>
+                            <Tab icon={<CustomizedMenus  style={{ color: 'white' }} />} />
+                        </Tabs>
+                        </div>
                 </Toolbar>
             </AppBar>
         </>

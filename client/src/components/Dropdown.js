@@ -87,7 +87,7 @@ export default function CustomizedMenus() {
             >
                 <MenuItem onClick={handleClose} disableRipple>
                     <EditIcon />
-                    Login / Register
+                    Login / Register 
                 </MenuItem>
                 <MenuItem onClick={handleClose} disableRipple>
                     <FileCopyIcon />

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { AppBar, Tabs, Tab, Toolbar, Typography } from '@mui/material';
 import logo from '../images/Logo5.png';
 import HeadsetMicRoundedIcon from '@mui/icons-material/HeadsetMicRounded';
-import Dropdown from './Dropdown.js';
+import CustomizedMenus from './Dropdown.js';
 import './Landing.css';
 // import './Search.css';
 
@@ -28,7 +28,7 @@ function Header() {
 
                     <Tabs sx={{ ml: "auto" }}>
                         <Tab LinkComponent={NavLink} to="/add" icon={<HeadsetMicRoundedIcon style={{ color: 'white' }} />} />
-                        <Tab LinkComponent={NavLink} to="/add" icon={<Dropdown style={{ color: 'white' }} />} />
+                        <Tab icon={<CustomizedMenus  style={{ color: 'white' }} />} />
                     </Tabs>
                 </Toolbar>
 

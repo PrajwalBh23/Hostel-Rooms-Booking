@@ -1,4 +1,4 @@
-import Room from '../model/Owner.js';
+import Room from '../model/Adding.js';
 // import jwt from 'jsonwebtoken';
 
 export const getAllRooms = async (req, res, next) => {
