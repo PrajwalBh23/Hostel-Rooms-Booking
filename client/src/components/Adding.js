@@ -22,7 +22,6 @@ function Adding() {
     const handleNext = () => {
         // Check if the current form is complete before proceeding to the next form
         if (isFormComplete(activeForm)) {
-            // Determine the next form based on the current form
             switch (activeForm) {
                 case 'form1':
                     setActiveForm('form2');
@@ -64,20 +63,20 @@ function Adding() {
 
     const isFormComplete = (formName) => {
         // Check if the current form is complete by checking if all required fields are filled
-        const { name, phone, email, experience } = formData[formName];
-        return name !== '' && phone !== '' && email !== '' && (formName === 'form1' || experience !== '');
+        const { name, phone, email } = formData[formName];
+        return name !== '' && phone !== '' && email !== '';
     };
 
-    const handleFormDataChange = (fieldName, value) => {
-        // Update the form data for the active form
+    const handleFormDataChange = (formName, fieldName, value) => {
+        // Update the form data for the current form
         setFormData((prevData) => ({
             ...prevData,
-            [activeForm]: {
-                ...prevData[activeForm],
+            [formName]: {
+                ...prevData[formName],
                 [fieldName]: value,
             },
         }));
-    };
+    }
 
     return (
         <>
@@ -104,7 +103,7 @@ function Adding() {
                 <div className="add_cart">
                     <a href="#form4" onClick={() => handleFormChange('form4')}> 
                         <img src={owner} alt="" />
-                        Rental Room Facilities
+                        Rental Room Faclities
                     </a>
                 </div>
                 <div className="add_cart">

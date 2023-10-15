@@ -27,8 +27,8 @@ function Header() {
                     </Typography>
 
                     <Tabs sx={{ ml: "auto" }}>
-                        <Tab LinkComponent={NavLink} to="/add" icon={<HeadsetMicRoundedIcon style={{ color: 'white' }} />} />
-                        <Tab icon={<CustomizedMenus  style={{ color: 'white' }} />} />
+                        <Tab LinkComponent={NavLink} to="/add" icon={<HeadsetMicRoundedIcon style={{ color: 'white', fontSize: '1.9rem' }} />} />
+                        <Tab icon={<CustomizedMenus fontSize="1.9rem" style={{ color: 'white' }} />} />
                     </Tabs>
                 </Toolbar>
 
