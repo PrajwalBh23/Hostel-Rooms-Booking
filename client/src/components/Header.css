@@ -1,5 +1,5 @@
 .Height-appl {
-  height: 12%;
+  height: 12.5%;
   /* content: "";
    background-image: url('../images/back3.png'); 
    background-color: rgba(0, 0,0 ,0.57);
@@ -136,9 +136,10 @@ i {
   border-radius: 8px;
   border: none;
   margin-top: 16px;
+  cursor: pointer;
 }
 
 
 .posting img {
-  width: 32px;
+  width: 30px;
 }

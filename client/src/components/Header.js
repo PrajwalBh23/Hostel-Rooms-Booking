@@ -4,14 +4,11 @@ import logo from '../images/Logo5.png';
 import HeadsetMicRoundedIcon from '@mui/icons-material/HeadsetMicRounded';
 import CustomizedMenus from './Dropdown.js';
 import './Header.css';
-// import './Search_Bar.css';
-
-import { NavLink } from 'react-router-dom';
-// import { brown } from '@mui/material/colors';
+import { NavLink,Link } from 'react-router-dom';
 import free from '../images/Icon-free.jpg';
 
 function Header() {
-    // const [value, setValue] = useState(0); // Set an initial value for the Tabs component
+    // const [value, setValue] = useState(0); // Set an initial value for the Tabs component 
 
     return (
         <>
@@ -50,9 +47,9 @@ function Header() {
                     </div>
                     <div>
                         <Tabs sx={{ ml: "auto" }}>
-                            <button className='posting'>Post Property <img style={{ marginLeft: "3px" }} src={free} alt="" /></button>
+                        <Link style={{textDecoration:'none'}} to="/add" ><button className='posting'>Post Property <img style={{ marginLeft: "3px" }} src={free} alt="" /></button></Link>
                             <Tab LinkComponent={NavLink} to="/add" icon={<HeadsetMicRoundedIcon style={{ color: 'white', fontSize: '1.9rem'}} />} />
-                            <Tab icon={<CustomizedMenus fontSize="1.9rem" style={{ color: 'white' }} />} />
+                            <Tab icon={<CustomizedMenus fontSize="1.9rem" style={{ color: 'white' }} />}/>
                         </Tabs>
                         </div>
                 </Toolbar>
