@@ -96,7 +96,7 @@ function Rooms() {
                                 </div>
 
                                 <div className="corner">
-                                    <a href="/" className='noUnderline'>View More</a>
+                                    <a href="/detail" className='noUnderline'>View More</a>
                                 </div>
                             </div>
                         </div>
@@ -137,7 +137,7 @@ function Rooms() {
                                 </div>
 
                                 <div className="corner">
-                                    <a href="/" className='noUnderline'>View More</a>
+                                    <a href="/detail" className='noUnderline'>View More</a>
                                 </div>
                             </div>
                         </div>
@@ -177,7 +177,7 @@ function Rooms() {
                                 </div>
 
                                 <div className="corner">
-                                    <a href="/" className='noUnderline'>View More</a>
+                                    <a href="/detail" className='noUnderline'>View More</a>
                                 </div>
                             </div>
                         </div>
@@ -217,7 +217,7 @@ function Rooms() {
                                 </div>
 
                                 <div className="corner">
-                                    <a href="/" className='noUnderline'>View More</a>
+                                    <a href="/detail" className='noUnderline'>View More</a>
                                 </div>
                             </div>
                         </div>
@@ -257,7 +257,7 @@ function Rooms() {
                                 </div>
 
                                 <div className="corner">
-                                    <a href="/" className='noUnderline'>View More</a>
+                                    <a href="/detail" className='noUnderline'>View More</a>
                                 </div>
                             </div>
                         </div>

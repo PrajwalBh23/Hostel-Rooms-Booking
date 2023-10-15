@@ -5,6 +5,7 @@ import Rooms from "./components/Rooms";
 import Hostel from "./components/Hostel";
 import Adding from "./components/Adding";
 import Form from "./components/Form";
+import Detail from "./components/Detail";
 import './App.css';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="/hostels" element={<Hostel />} exact />
         <Route path="/add" element={<Adding />} exact />
         <Route path="/form" element={<Form />} exact />
+        <Route path="/detail" element={<Detail />} exact />
       </Routes>
     </>
   );

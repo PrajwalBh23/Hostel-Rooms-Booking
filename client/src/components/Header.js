@@ -1,8 +1,8 @@
 import React from 'react';
 import { AppBar, Tabs, Tab, Toolbar, Typography } from '@mui/material';
 import logo from '../images/Logo5.png';
-import HeadsetMicRoundedIcon from '@mui/icons-material/HeadsetMicRounded';
 import CustomizedMenus from './Dropdown.js';
+import Headset from './Headset.js';
 import './Header.css';
 import { NavLink,Link } from 'react-router-dom';
 import free from '../images/Icon-free.jpg';
@@ -48,8 +48,8 @@ function Header() {
                     <div>
                         <Tabs sx={{ ml: "auto" }}>
                         <Link style={{textDecoration:'none'}} to="/add" ><button className='posting'>Post Property <img style={{ marginLeft: "3px" }} src={free} alt="" /></button></Link>
-                            <Tab LinkComponent={NavLink} to="/add" icon={<HeadsetMicRoundedIcon style={{ color: 'white', fontSize: '1.9rem'}} />} />
-                            <Tab icon={<CustomizedMenus fontSize="1.9rem" style={{ color: 'white' }} />}/>
+                            <Tab icon={<Headset style={{ color: 'white', fontSize: '2rem'}} />} />
+                            <Tab icon={<CustomizedMenus fontSize="1.9rem" style={{ color: 'white'}} />}/>
                         </Tabs>
                         </div>
                 </Toolbar>

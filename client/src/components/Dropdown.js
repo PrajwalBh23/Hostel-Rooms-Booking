@@ -41,7 +41,7 @@ const StyledMenu = styled((props) => (
             '& .MuiSvgIcon-root': {
                 fontSize: 18,
                 color: theme.palette.text.secondary,
-                marginRight: theme.spacing(1.5),
+                marginRight: theme.spacing(0),
             },
             '&:active': {
                 backgroundColor: alpha(
@@ -95,7 +95,7 @@ export default function CustomizedMenus({ fontSize }) {
                     <FileCopyIcon />
                     My Activity
                 </MenuItem>
-                <Divider sx={{ my: 0.5 }} />
+                <Divider sx={{ my: 0.5, width:'80%', margin:'auto' }} />
                 <MenuItem onClick={handleClose} disableRipple>
                     <ArchiveIcon />
                     Saved
