@@ -73,6 +73,7 @@ export default function CustomizedMenus({ fontSize }) {
         variant="contained"
         disableElevation
         onMouseEnter={handleClick}
+        style={{backgroundColor:'transparent'}}
       >
         <HeadsetMicRoundedIcon style={{ fontSize: fontSize }} />
       </Button>
@@ -93,7 +94,7 @@ export default function CustomizedMenus({ fontSize }) {
             9874561
           </div>
         </MenuItem>
-        <Divider sx={{ my: 0.1, width: '85%', margin:'auto' }} />
+        <Divider sx={{ my: 0.1, width: '85%', margin: 'auto' }} />
         <MenuItem>
           <FileCopyIcon />
           <div className="detail">
