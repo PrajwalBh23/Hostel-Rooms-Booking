@@ -17,7 +17,7 @@ function Header() {
                     <div className='spacin'>
                         <Typography>
                             <NavLink to={"/"} className="logo-containe">
-                                <img src={logo} width={"122px"} alt="" />
+                                <img src={logo} width={"128px"} alt="" />
                                 <div className="logo-tex">
                                     <div className="logo-text-lin1">Scholar</div>
                                     <div className="logo-text-lin2">Stay</div>
