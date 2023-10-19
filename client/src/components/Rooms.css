@@ -1,27 +1,3 @@
-.filter {
-  background-color: rgb(255, 255, 255);
-  border: 2px solid rgb(178, 98, 98);
-  display: flex;
-  flex-direction: column;
-  
-  /* justify-content: flex-start; */
-  /* align-items: flex-start; */
-  margin: 10px 20px;
-  padding: 10px; 
-  border-radius: 18px;
-}
-
-.filter .contain {
-  margin-top: 10px; 
-}
-
-.filter li {
-  list-style: none;
-}
-.filter .main, .head{
-  text-align: center;
-}
-
 /* Rooms.css */
 
 /* Sidebar styling */
