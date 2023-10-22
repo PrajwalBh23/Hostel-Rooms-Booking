@@ -62,11 +62,11 @@
   display: flex;
   flex-direction: column;
   margin: 10px 20px 15px 0px;
-  border: 2px solid rgb(178, 98, 98);
   padding: 10px;
   border-radius: 18px;
   font-size: large;
-  background-color: cornsilk;
+  background-color: transparent;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
   height: 17%;
   /*  */
   
@@ -127,22 +127,25 @@
 }
 
 .button2 {
-  background-color: bisque;
+  background-color: #afd275;
   margin-right: 7%;
-  border-radius: 20px;
+  border: none;
+  border-radius: 12px;
+  color: black;
   white-space: nowrap;
+  padding: 5px;
 }
 
 .button {
   position: absolute;
   display: flex;
   right: 22%;
-  background-color: cornsilk;
+  background-color: #c5cbe3;
   border-radius: 24px;
   font-size: 80%;
   height: 4%;
   margin-top: -2.1%;
-  border: 2px solid brown;
+  border: none;
   align-items: center;
 }
 

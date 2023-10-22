@@ -55,7 +55,7 @@ function Rooms() {
                                 <ul>
                                     <li><Checkbox {...label} />Electricity</li>
                                     <li><Checkbox {...label} />Water</li>
-                                    <li><Checkbox {...label} />Meal</li>
+                                    <li className='Setprop'><Checkbox {...label} />Meal</li>
                                 </ul>
                             </div>
                         </div>

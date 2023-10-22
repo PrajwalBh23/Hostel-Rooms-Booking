@@ -13,10 +13,10 @@ function Rooms() {
 
     return (
         <>
-            <Header />
+            <Header/>
             <div>
                 <Box display="flex" marginTop="7%" width="100%" flexDirection="row">
-                    <Typography sx={{ fontFamily: "fantasy" }} width={"25%"}>
+                    <Typography sx={{ fontFamily: "fantasy" }} width={"25%"} >
                         <div className="filter">
                             <div className="main"><h2>Filters</h2></div>
                             <div className="contain">

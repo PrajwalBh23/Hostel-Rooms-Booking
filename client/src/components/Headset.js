@@ -90,7 +90,7 @@ export default function CustomizedMenus({ fontSize }) {
         <MenuItem>
           <EditIcon />
           <div className="detail">
-            <div className="head">Mobile No. | 9 AM to 8 PM IST</div>
+            <div className="head" style={ {color:"black"}}>Mobile No. | 9 AM to 8 PM IST</div>
             9874561
           </div>
         </MenuItem>
@@ -98,7 +98,7 @@ export default function CustomizedMenus({ fontSize }) {
         <MenuItem>
           <FileCopyIcon />
           <div className="detail">
-            <div className="head" style={{ textAlign: 'left' }}>Email ID.</div>
+            <div className="head" style={{ textAlign: 'left', color:"black" }}>Email ID.</div>
             pbh@email.com
           </div>
         </MenuItem>
