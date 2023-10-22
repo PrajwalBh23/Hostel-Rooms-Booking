@@ -27,6 +27,14 @@ function Rooms() {
                                 </ul>
                             </div>
                             <div className="contain">
+                                <div className="head">Available For</div>
+                                <ul>
+                                    <li><Checkbox {...label} />Girls</li>
+                                    <li><Checkbox {...label} />Boys</li>
+                                    <li><Checkbox {...label} />Prefer Not to say</li>
+                                </ul>
+                            </div>
+                            <div className="contain">
                                 <div className="head">Price</div>
                                 <ul>
                                     <li><Checkbox {...label} />1000-2000</li>
@@ -44,17 +52,19 @@ function Rooms() {
                                 </ul>
                             </div>
                             <div className="contain">
-                                <div className="head">Available For</div>
-                                <ul>
-                                    <li><Checkbox {...label} />Girls</li>
-                                    <li><Checkbox {...label} />Boys</li>
-                                </ul>
-                            </div>
-                            <div className="contain">
                                 <div className="head">Including Bills</div>
                                 <ul>
                                     <li><Checkbox {...label} />Electricity</li>
                                     <li><Checkbox {...label} />Water</li>
+                                </ul>
+                            </div>
+                            <div className="contain">
+                                <div className="head">Deposite</div>
+                                <ul>
+                                    <li><Checkbox {...label} />No Deposit</li>
+                                    <li><Checkbox {...label} />1 Month Deposit</li>
+                                    <li><Checkbox {...label} />2 Month Deposit</li>
+                                    <li className='Setprop'><Checkbox {...label} />3 Month Deposit</li>
                                 </ul>
                             </div>
                         </div>
@@ -90,10 +100,10 @@ function Rooms() {
                             </div>
                             <div className="block">
 
-                                <div className="owner">
+                                <div className="owner1">
 
-                                    <span><VerifiedRoundedIcon style={{ verticalAlign: 'sub', marginRight:'2px' }}/></span>
-                                    <span className='inner-block'>Mansi Pillewan</span>
+                                    <span><VerifiedRoundedIcon style={{ verticalAlign: 'text-top',marginTop:'-2px', marginRight:'2px', color:'#0073e6' }}/> </span>
+                                    <span className='inner-block'> Mansi Pillewan<i style={{fontSize:'small', color:'#0073e6'}}>Owner details</i></span>
 
                                 </div>
 
@@ -131,10 +141,10 @@ function Rooms() {
                             </div>
                             <div className="block">
 
-                                <div className="owner">
+                                <div className="owner1">
 
-                                    <span><VerifiedRoundedIcon style={{ verticalAlign: 'sub', marginRight:'2px' }}/></span>
-                                    <span className='inner-block'>Mansi Pillewan</span>
+                                    <span><VerifiedRoundedIcon style={{ verticalAlign: 'text-top',marginTop:'-2px', marginRight:'2px', color:'#0073e6' }}/> </span>
+                                    <span className='inner-block'> Mansi Pillewan<i style={{fontSize:'small', color:'#0073e6'}}>Owner details</i></span>
 
                                 </div>
 
@@ -172,50 +182,10 @@ function Rooms() {
                             </div>
                             <div className="block">
 
-                                <div className="owner">
+                                <div className="owner1">
 
-                                    <span><VerifiedRoundedIcon style={{ verticalAlign: 'sub', marginRight:'2px' }}/></span>
-                                    <span className='inner-block'>Mansi Pillewan</span>
-
-                                </div>
-
-                                <div className="corner">
-                                    <a href="/detail" className='noUnderline'>View More</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="result">
-                            <div className="box">
-                                <img src={house} alt="not showing" />
-                                <div className="info">
-                                    <div className="price">₹10000-12000</div>
-                                    <div className="address">House No. 9 Mahada Colony, Butibori Nagpur</div>
-
-                                    <div className="buttons">
-                                        <button className='button2'>Shared +4</button>
-                                        <button className='button2'>Semi-Furnished</button>
-                                        <button className='button2'>Only Girls</button>
-
-                                    </div>
-                                    <br></br>
-
-                                    <div className="extra">2 Bedrooms with Separate Common Area & Seprate Washroom</div>
-
-                                    {/* <br></br> */}
-                                    <div className="availablity">Available Now</div>
-                                    <button className='button'>10+ Years Experience</button>
-                                </div>
-                                <div className="map">
-                                    <img src={map} alt="" />
-                                </div>
-                            </div>
-                            <div className="block">
-
-                                <div className="owner">
-
-                                    <span><VerifiedRoundedIcon style={{ verticalAlign: 'sub', marginRight:'2px' }}/></span>
-                                    <span className='inner-block'>Mansi Pillewan</span>
+                                    <span><VerifiedRoundedIcon style={{ verticalAlign: 'text-top',marginTop:'-2px', marginRight:'2px', color:'#0073e6' }}/> </span>
+                                    <span className='inner-block'> Mansi Pillewan<i style={{fontSize:'small', color:'#0073e6'}}>Owner details</i></span>
 
                                 </div>
 
