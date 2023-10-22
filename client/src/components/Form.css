@@ -6,3 +6,9 @@
     width: 40%;
     height: 300px;
 }
+
+.owner{
+    background-color: bisque;
+    display: flex;
+    flex-direction: column;
+}

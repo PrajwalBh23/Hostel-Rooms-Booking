@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Header from './Header.js';
 import { Form1, Form2, Form3, Form4, Form5 } from './Exporter.js';
 import './Form.css'
+import { Link } from 'react-router-dom';
 import { Button } from "@mui/material";
 
 function FormContainer() {
@@ -18,9 +19,7 @@ function FormContainer() {
         experience: ''
     });
     const [formData3, setFormData3] = useState({
-        name: '',
-        phone: '',
-        email: ''
+        image: ''
     });
     const [formData4, setFormData4] = useState({
         name: '',
@@ -29,9 +28,7 @@ function FormContainer() {
         experience: ''
     });
     const [formData5, setFormData5] = useState({
-        name: '',
-        phone: '',
-        email: ''
+        image: ''
     });
 
     const nextStep = () => {
@@ -44,7 +41,7 @@ function FormContainer() {
                 setStep(step + 1);
             }
         } else if (step === 3) {
-            if (formData3.name && formData3.phone && formData3.email) {
+            if (formData3.images) {
                 setStep(step + 1);
             }
         } else if (step === 4) {
@@ -52,7 +49,7 @@ function FormContainer() {
                 setStep(step + 1);
             }
         } else if (step === 5) {
-            if (formData5.name && formData5.phone && formData5.email) {
+            if (formData5.image) {
                 setStep(step + 1);
             }
         }
@@ -91,6 +88,9 @@ function FormContainer() {
                 )}
                 {step < 5 && (
                     <Button onClick={nextStep}>Save & Next</Button>
+                )}
+                {step === 5 && (
+                    <Button><Link style={{textDecoration:'none'}} to="/add" >Save & Next</Link></Button>
                 )}
             </div>
         </>
