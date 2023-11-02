@@ -226,7 +226,7 @@ i {
   justify-content: center;
   align-items: center;
   padding: 20px 0px;
-  background: linear-gradient(90deg, rgba(96, 159, 203, 0.5), rgba(255, 192, 203, 0.5), rgba(161, 71, 188, 0.5)); /* Very faint colors */
+  background: linear-gradient(90deg, rgba(74, 120, 153, 0.5), rgba(229, 172, 182, 0.5), rgba(161, 71, 188, 0.5)); /* Very faint colors */
   height: 320px;
   margin: 5px 0; /* Add some margin to separate the blocks */
 }
