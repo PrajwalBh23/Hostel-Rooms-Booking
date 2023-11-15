@@ -1,8 +1,13 @@
 .detailcont{
-    width:100%;
-    margin-top: 5%;
+    width:96%;
+    margin: auto;
+    margin-top: 7%;
+    margin-bottom: 2%;
     display: flex;
     flex-direction: row;
+    background-color: rgb(221, 234, 235);
+    border-radius: 18px;
+    gap: 1%;
 }
 .block1{
     width:40%;
@@ -10,16 +15,84 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 10px;
 }
 .block1 img{
-    margin:0px 10px;
     border-radius: 8px;
     width: 100%;
     height: 80%;    
 }
 .block2{
-    margin: 2% 1% 0% 1%;
-    width:60%;
-    height: 85vh;   
-    background-color: burlywood; 
+    width:54.5%;
+    height: 78vh;
+    margin: 12px;   
+    /* background-color: burlywood;  */
+    /* border: 1px solid red; */
 }
+.section-nav {
+    display: flex;
+    width: 100%;
+    gap: 20%; /* Adjust the gap as needed */
+    margin: 20px 7%; /* Adjust the top and bottom margin as needed */
+}
+.section-nav button{
+      font-size: larger;
+      border: 0px;
+      background-color: transparent;
+  }
+  
+  .line {
+    width: 95%;
+    height: 1px;
+    background-color: gray; /* Adjust the line color as needed */
+    margin: auto; /* Adjust the top and bottom margin as needed */
+  }
+  .button {
+    cursor: pointer;
+  }
+  
+  .block2 .active {
+    color: #1976d2;
+    border-radius: 5px;
+    font-weight: 600;
+  }
+  .dbox{
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid red; */
+    width: 30%;
+    padding: 0px 10px;
+  }
+  .overview-section{
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    gap: 20%;
+    flex-wrap: wrap;
+  }
+  .dbox ul{
+    margin-top: -6px;
+  }
+  .owners-section{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+.owners-section .dbox{
+    margin-top: 20px;
+  }
+  .owners-section .dbox p{
+    margin-bottom: -7px ;
+  }
+  .explore-section{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+  }
+  button{
+    cursor: pointer;
+  }

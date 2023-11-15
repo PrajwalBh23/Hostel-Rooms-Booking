@@ -61,7 +61,7 @@
 }
 
 .margin-spac input {
-  width: 340px;
+  width: 320px; /*(It's is fit up to 1275x 858)*/
 }
 
 .search-ba {

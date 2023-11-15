@@ -2,13 +2,60 @@
     display: flex;
     flex-direction: column;
     /* background-color: cadetblue; */
-    margin: 15% 30%;
-    width: 40%;
-    height: 300px;
+    margin: 8% 35% 3% 35%;
+    width: 30%;
+    border-radius: 18px;
+    border: 1px solid #1976d2;
+    /* box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px; */
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+    /* background-image: url('../images/all1.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover; */
 }
 
 .owner{
-    background-color: bisque;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+    border-radius: 18px;
+}
+.owner .textfield{
+    margin: 10px 20px;
+}
+.prop .textfield{
+    margin: 10px 5%;
+    width: 40%;
+}
+.prop .full-width{
+    width: 90%;
+}
+
+.flexing{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 10px;
+}
+.boxing{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15%;
+    margin-bottom: 10px;
+}
+.fact{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.fact .textfield{
+    margin: 10px 1%;
+}
+.flex-filed{
     display: flex;
     flex-direction: column;
 }

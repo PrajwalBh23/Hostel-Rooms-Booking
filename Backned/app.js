@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import './db/connection.js';
 import auth from "./routes/auth.js";
 import router from "./routes/rooms.js";
+import cors from 'cors';
 // import cookieParser from "cookie-parser";
 
 const app = express();
@@ -13,11 +14,18 @@ dotenv.config({ path: './config.env' });
 // app.use(bodyParser.json({ limit: "30mb", extended: true })); 
 // app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
+app.use(cors());
+
 app.use(express.json());
 // app.use(cookieParser);
 
 app.use('/auth', auth);
 app.use('/stay', router);
+
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something went wrong!');
+});
 
 const PORT = process.env.PORT || 5000;
 

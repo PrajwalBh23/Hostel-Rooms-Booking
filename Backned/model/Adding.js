@@ -1,62 +1,92 @@
+
 import mongoose from "mongoose";
 // import { text } from "express";
 
 const Schema = mongoose.Schema;
 
 const roomSchema = new Schema({
-    name:{
+    name: {
         type: String,
         required: true
     },
-    phone:{
+    phone: {
         type: Number,
         required: true
     },
-    email:{
+    email: {
         type: String,
         required: true
     },
-    type:{
-        type: String,
-        enum: ['Shared','Single']
+    experience: {
+        type: Number,
+        required: true
     },
-    Extra:{
-        type: String,
-        enum: ['Only Boys','Only Girls','Mixed'],
+    owned: {
+        type: Number,
+        required: true
     },
-    city:{
+    address: {
         type: String,
         required: true
     },
-    address:{
+    room: {
         type: String,
         required: true
     },
-    photos:{
+    price: {
+        type: String,
+        required: true
+    },
+    share: {
+        type: String,
+        enum: ['Shared', 'Single']
+    },
+    sharing: {
+        type: String,
+        required: true
+    },
+    gender: {
+        type: String,
+        enum: ['Male', 'Female', 'Prefer Not to say'],
+    },
+    deposit: {
+        type: String,
+        // required: true
+    },
+    image: {
         type: [String]
     },
-    Near_local:{
-        type: Array
+    rules: {
+        type: Array,
+        // required: true
     },
-    rooms:{
-        type: [String],
-        min:0,
-        max:5
+    config: {
+        type: Array,
+        // required: true
     },
-    Price:{
+    semiFurnished: {
         type: String,
-        required: true
+        enum: ['Semi-Furnished', 'Full-Furnished', 'Un-Furnished'],
     },
-    Condition:{
-        type: Array
+    bill: {
+        type: Array,
+        // required: true
     },
-    availbility:{
-        type: Boolean,
-        default:false
-    },
-    verify:{
+    park: {
         type: String,
-        required: true
+        // required: true
+    },
+    college: {
+        type: Array,
+        // required: true
+    },
+    area: {
+        type: Array,
+        // required: true
+    },
+    verify: {
+        type: String,
+        // required: true
     },
 });
 
@@ -64,4 +94,4 @@ const roomSchema = new Schema({
 // hotelSchema.index({ name:'text', description : 'text' })
 
 
-export default mongoose.model("Room",roomSchema);
+export default mongoose.model("Room", roomSchema);

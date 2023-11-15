@@ -6,6 +6,7 @@ import pho from '../images/pho.jpg';
 import fac from '../images/fac1.jpg';
 import prp from '../images/prp.jpg';
 import veri from '../images/veri.png';
+import loca from '../images/loca2.png';
 import './Adding.css';
 import { Link} from 'react-router-dom';
 
@@ -38,6 +39,12 @@ function Adding() {
                             <img style={{ width: '65%', height: '100%', border: 'none' }} src={fac} alt="" />
                         </div>
                         Rental Room Faclities
+                    </a>
+                    <a href="/form">
+                        <div className="add_cart">
+                            <img style={{ width: '85%', height: '90%', border: 'none' }} src={loca} alt="" />
+                        </div>
+                        Near By Locations
                     </a>
                     <a href="/form">
                         <div className="add_cart">

@@ -8,33 +8,37 @@ export const register = async (req, res, next) => {
         const hash = bcrypt.hashSync(req.body.password, salt);
 
         // Check if all required fields are provided
-        if (!req.body.name || !req.body.email || !req.body.password || !req.body.phone || !req.body.Username) {
-            return res.status(422).json({ error: "P fill in all the fields properly" });
+        if (!req.body.name || !req.body.email || !req.body.password || !req.body.phone) {
+            return res.status(422).json({ error: "Please fill in all the fields properly" });
         }
 
         const newUser = new User({
-            Username: req.body.Username,
             email: req.body.email,
             name: req.body.name,
             phone: req.body.phone,
             password: hash,
         });
+
+        // Save the user and generate a token
         await newUser.save();
-        res.status(200).send("User has been created");
+        const token = await newUser.generateAuthToken();
+
+        res.status(200).json({ message: "User has been created", token });
     } catch (error) {
         next(error);
     }
 }
 
+
 export const login = async (req, res, next) => {
     try {
         let token;
-        const {Username, password} = req.body;
+        const {email, password} = req.body;
 
-        if(!Username || !password){
+        if(!email || !password){
             return res.status(400).json({error:'Please filled the data'});
         }
-        const user = await User.findOne({ Username: req.body.Username });
+        const user = await User.findOne({ email: req.body.email });
         if (user) 
         {
             const isPasswordCorrect = await bcrypt.compare(req.body.password, user.password);

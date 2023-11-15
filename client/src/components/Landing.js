@@ -176,6 +176,12 @@ function Header() {
                                 label="Name"
                                 variant="outlined"
                                 name="Name"
+                                sx={{
+                                    "& .MuiOutlinedInput-root": {
+                                      height: '40px',
+                                      marginTop:'3px'
+                                    },
+                                  }}
                             />
                             <TextField
                                 placeholder="Please enter Your Phone No."
@@ -183,6 +189,12 @@ function Header() {
                                 label="Phone No."
                                 variant="outlined"
                                 name="Phone"
+                                sx={{
+                                    "& .MuiOutlinedInput-root": {
+                                      height: '40px',
+                                      marginTop:'3px'
+                                    },
+                                  }}
                             />
                             <TextField
                                 placeholder="Please enter Your Email Id"
@@ -190,6 +202,12 @@ function Header() {
                                 label="Email Id"
                                 variant="outlined"
                                 name="Email id"
+                                sx={{
+                                    "& .MuiOutlinedInput-root": {
+                                      height: '40px',
+                                      marginTop:'3px'
+                                    },
+                                  }}
                             />
                             <TextField
                                 placeholder="Please enter Your Query"
@@ -197,6 +215,12 @@ function Header() {
                                 label="Query"
                                 variant="outlined"
                                 name="Query"
+                                sx={{
+                                    "& .MuiOutlinedInput-root": {
+                                      height: '40px',
+                                      marginTop:'3px'
+                                    },
+                                  }}
                             />
 
                             <Stack spacing={1}>

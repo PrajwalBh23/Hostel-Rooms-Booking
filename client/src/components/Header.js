@@ -6,9 +6,11 @@ import Headset from './Headset.js';
 import './Header.css';
 import { NavLink,Link } from 'react-router-dom';
 import free from '../images/Icon-free.jpg';
+// import { useAuth } from '../AuthContext';
 
 function Header() {
     // const [value, setValue] = useState(0); // Set an initial value for the Tabs component 
+    // const { user, logout } = useAuth();
 
     return (
         <>
