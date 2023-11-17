@@ -160,7 +160,7 @@ const SignupPage = () => {
               >
                 Sign Up
               </Button>
-            </div>
+            </div>z
           </div>
         </DialogContent>
         <DialogActions>

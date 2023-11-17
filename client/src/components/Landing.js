@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import { Tabs, Tab, Toolbar, Typography, TextField, Button } from '@mui/material';
 import logo from '../images/Logo5.png';
 import CustomizedMenus from './Dropdown.js';
@@ -10,7 +11,8 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import PinterestIcon from '@mui/icons-material/Pinterest';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import home from '../images/home.jpg';
-import pg from '../images/pg.jpg'; 
+import pg from '../images/pg.jpg';
+
 
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
@@ -19,22 +21,155 @@ import Stack from '@mui/material/Stack';
 import { NavLink } from 'react-router-dom';
 import { brown } from '@mui/material/colors';
 
-function Header() {
+const collegeList = [
+    'Rashtrasant Tukadoji Maharaj Nagpur University',
+    'Kavikulaguru Kalidas Sanskrit University',
+    'Maharashtra Animal and Fishery Sciences University',
+    'Maharashtra National Law University, Nagpur',
+    'Laxminarayan Innovation Technological University',
+    'Symbiosis International University',
+    'Indian Institute of Information Technology, Nagpur',
+    'National Power Training Institute',
+    'Visvesvaraya National Institute of Technology Nagpur',
+    'Government College of Engineering, Nagpur',
+    'Indian Institute of Fire Engineering, Nagpur',
+    'Laxminarayan Innovation Technological University',
+    'Cummins College of Engineering for Women, Nagpur',
+    'G. H. Raisoni College of Engineering Nagpur',
+    'S. B. Jain Institute of Technology, Management and Research',
+    'Shri Ramdeobaba College of Engineering and Management',
+    'St. Vincent Pallotti College of Engineering and Technology',
+    'Yeshwantrao Chavan College of Engineering',
+    'G H Raisoni Academy of Engineering and Technology',
+    'Priyadarshini College of Engineering, Nagpur',
+    'JD College of Engineering and Management',
+    'Tulashiramaji Gayakawad Patil College of Engineering and Technology',
+    'Priyadarshini JL College of Engineering',
+    'Institute of Science, Nagpur',
+    'Jhulelal Institute of Technology',
+    'Kavikulguru Institute of Technology and Science',
+    'Nagpur Institute of Technology',
+    'Priyadarshini Institute of Engineering and Technology',
+    'Sharad Pawar College of Pharmacy',
+    'Smt. Radhikatai Pandav College of Engineering, Nagpur',
+    'St. Francis De Sales College',
+    'Wainganga College of Engineering and Management',
+    'Aabha Gaikwad-Patil College of Engineering',
+    'Dr. Babasaheb Ambedkar College of Engineering and Research',
+    'Gurunanak Institute of Engineering and Management',
+    'ITM College of Engineering',
+    'Nagarjuna Institute of Engineering Technology & Management',
+    'Nuva College of Engineering & Technology',
+    'Priyadarshini Indira Gandhi College of Engineering',
+    'Rajiv Gandhi College of Engineering & Research',
+    'Shri Govindarao Wanjari College of Engineering and Technology',
+    'Smt. Bhagwati Chaturvedi College of Engineering',
+    'Smt. Rajshree Mulak College of Engineering for Women',
+    'Suryodaya College of Engineering and Technology',
+    'V.M. Institute of Engineering and Technology',
+    'Vidya Niketan Institute of Engineering & Technology',
+    'Vilasarao Deshamukh College of Engineering and Technology',
+    'Government Polytechnic, Nagpur',
+    'Shri Datta Meghe Polytechnic',
+    'Maharashtra National Law University, Nagpur',
+    'Symbiosis Law School, Nagpur',
+    'Indian Institute of Management Nagpur',
+    'Datta Meghe Institute of Management Studies',
+    'Institute of Management Technology, Nagpur',
+    'Shri Ramdeobaba College of Engineering and Management',
+    'Tirpude Institute of Management Education',
+    'Dr. Ambedkar College, Nagpur',
+    'Lady Amritbai Daga and Smt. Ratnidevi Purohit College for Women',
+    'Shri Binzani City College',
+    'Dhanwate National College',
+    'St. Francis De Sales College',
+    'G.H. Raisoni Department of Microbiology and Biotechnology',
+    'G.S. College of Commerce and Economics',
+    'Hislop College',
+    'Institute of Science, Nagpur',
+    'Shivaji Science College, Nagpur',
+    'Vasantrao Naik Government Institute of Arts and Social Sciences',
+    'All India Institute of Medical Sciences, Nagpur',
+    'Government Medical College and Hospital, Nagpur',
+    'Indira Gandhi Government Medical College, Nagpur',
+    'NKP Salve Institute of Medical Science and Hospital, Nagpur',
+    'Datta Meghe Institute of Medical Science Wanadongri, Nagpur',
+    'Shri Datta Meghe College of Architecture'
+];
+
+function Landing() {
     const [value, setValue] = useState(0);
-    const [searchOption, setSearchOption] = useState('option1'); // Initialize with option1
+    const [searchOption, setSearchOption] = useState('option1');
+    const [searchCollege, setSearchCollege] = useState('');
+    const [collegeSuggestions, setCollegeSuggestions] = useState([]);
 
     const handleSearchOptionChange = (e) => {
         setSearchOption(e.target.value);
+        setSearchCollege('');
+        setCollegeSuggestions([]);
     };
 
-    // Video Start 
+    const handleCollegeChange = (e) => {
+        const inputValue = e.target.value;
+        setSearchCollege(inputValue);
+
+        // Update college suggestions based on input
+        const filteredColleges = collegeList.filter((college) =>
+            college.toLowerCase().includes(inputValue.toLowerCase())
+        );
+
+        setCollegeSuggestions(filteredColleges);
+    };
+
+    const handleCollegeSelect = (selectedCollege) => {
+        setSearchCollege(selectedCollege);
+        setCollegeSuggestions([]);
+    };
+
+    const handleSearch = () => {
+        const searchData = {
+            searchOption,
+            searchCollege,
+        };
+
+        // Make a POST request to your backend endpoint
+        axios.post('http://localhost:5000/stay/search', searchData)
+            .then(response => {
+                // Handle the response from the backend
+                console.log('Backend response:', response.data);
+            })
+            .catch(error => {
+                // Handle errors
+                console.error('Error sending data to backend:', error);
+            });
+            window.location.href = '/roomsresult';
+    };
+
+    useEffect(() => {
+        // Add event listener to close suggestions on clicking outside the input area
+        const handleClickOutside = (e) => {
+            const searchContainer = document.querySelector('.search-container');
+            if (searchContainer && !searchContainer.contains(e.target)) {
+                // Click is outside the search container, close suggestions
+                setCollegeSuggestions([]);
+            }
+        };
+
+        // Attach the event listener
+        document.addEventListener('click', handleClickOutside);
+
+        // Cleanup the event listener on component unmount
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, []);
+
     function VideoComponent() {
         const [playing, setPlaying] = useState(false);
 
         const handleVideoClick = () => {
             setPlaying(!playing);
         };
-
         return (
             <div className="video-container" onClick={handleVideoClick}>
                 <ReactPlayer
@@ -81,20 +216,47 @@ function Header() {
                         <Tabs sx={{ m: "auto" }} >
                             <h2 sx={{ m: 'auto' }} className='slo_text'>Where comfort meets community and student find thier second home</h2>
                         </Tabs>
-                        <div className="search-bar">
-                            <select className="select-option" onChange={handleSearchOptionChange} value={searchOption}>
+                        <div style={{ color: 'black' }} className="search-bar">
+                            <select
+                                className="select-option"
+                                onChange={handleSearchOptionChange}
+                                value={searchOption}
+                            >
                                 <option value="option1">College</option>
                                 <option value="option2">Area</option>
                             </select>
 
                             <div className="search-container">
                                 {searchOption === 'option1' ? (
-                                    <input type="text" placeholder="Enter College Name" />
+                                    <div className="search-input">
+                                        <input
+                                            type="text"
+                                            placeholder="Enter College Name"
+                                            value={searchCollege}
+                                            onChange={handleCollegeChange}
+                                        />
+                                        {collegeSuggestions.length > 0 && (
+                                            <div className="suggestions">
+                                                {collegeSuggestions.map((college, index) => (
+                                                    <div key={index} onClick={() => handleCollegeSelect(college)}>
+                                                        {college}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
                                 ) : (
-                                    <input type="text" placeholder="Enter Area Name" />
+                                    <input
+                                        type="text"
+                                        placeholder="Enter Area Name"
+                                        value={searchCollege}
+                                        onChange={(e) => setSearchCollege(e.target.value)}
+                                    />
                                 )}
-                                <button className='but'>Search</button>
                             </div>
+                            <button className="but" onClick={handleSearch}>
+                                Search
+                            </button>
                         </div>
                     </Toolbar>
                 </div>
@@ -110,7 +272,7 @@ function Header() {
                 </div>
 
                 <div className="Land_block-2">
-                            <img src={pg} alt="" style={{marginTop: '0', height: '230px', width: '400px' }}  />
+                    <img src={pg} alt="" style={{ marginTop: '0', height: '230px', width: '400px' }} />
                     <div class="desc-2">
                         <div className="text-2">
                             <h1>Step into the extraordinary</h1>
@@ -178,10 +340,10 @@ function Header() {
                                 name="Name"
                                 sx={{
                                     "& .MuiOutlinedInput-root": {
-                                      height: '40px',
-                                      marginTop:'3px'
+                                        height: '40px',
+                                        marginTop: '3px'
                                     },
-                                  }}
+                                }}
                             />
                             <TextField
                                 placeholder="Please enter Your Phone No."
@@ -191,10 +353,10 @@ function Header() {
                                 name="Phone"
                                 sx={{
                                     "& .MuiOutlinedInput-root": {
-                                      height: '40px',
-                                      marginTop:'3px'
+                                        height: '40px',
+                                        marginTop: '3px'
                                     },
-                                  }}
+                                }}
                             />
                             <TextField
                                 placeholder="Please enter Your Email Id"
@@ -204,10 +366,10 @@ function Header() {
                                 name="Email id"
                                 sx={{
                                     "& .MuiOutlinedInput-root": {
-                                      height: '40px',
-                                      marginTop:'3px'
+                                        height: '40px',
+                                        marginTop: '3px'
                                     },
-                                  }}
+                                }}
                             />
                             <TextField
                                 placeholder="Please enter Your Query"
@@ -217,10 +379,10 @@ function Header() {
                                 name="Query"
                                 sx={{
                                     "& .MuiOutlinedInput-root": {
-                                      height: '40px',
-                                      marginTop:'3px'
+                                        height: '40px',
+                                        marginTop: '3px'
                                     },
-                                  }}
+                                }}
                             />
 
                             <Stack spacing={1}>
@@ -236,4 +398,4 @@ function Header() {
     )
 }
 
-export default Header;
+export default Landing;

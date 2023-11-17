@@ -34,7 +34,8 @@ function FormContainer() {
     });
     const [formData5, setFormData5] = useState({
         college: [''],
-        area: ['']
+        area: [''],
+        fact: ['']
     });
     const [formData6, setFormData6] = useState({
         verify: ''
@@ -63,11 +64,12 @@ function FormContainer() {
                     setStep(step + 1);
                 }
         } else if (step === 5) {
-            const { college, area } = formData5;
-                if (college[0] && area[0] ) {
-                    setStep(step + 1);
-                }
-        }
+            // Validation for Form5
+            const { college, area, fact } = formData5;
+            if (college[0] && area[0] && fact[0]) {
+                setStep(step + 1);
+            }
+        } 
         else if (step === 6) {
             formData6.verify = typeof formData6.verify === 'object' ? JSON.stringify(formData6.verify) : formData6.verify;
 

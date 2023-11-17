@@ -6,11 +6,18 @@ import AddIcon from '@mui/icons-material/Add';
 
 export function Form1({ formData, setFormData }) {
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
+        const { name, value,type, checked } = e.target;
+        if (type === 'checkbox') {
+            setFormData({
+                ...formData,
+                [name]: checked ? value : '', // Set value only if the checkbox is checked
+            });
+        } else {
+            setFormData({
+                ...formData,
+                [name]: value,
+            });
+        }
     }
 
     return (
@@ -80,22 +87,21 @@ export function Form1({ formData, setFormData }) {
                     },
                 }}
             />
-            <TextField
-                placeholder="Number of Rental Rooms Owned"
-                id="outlined-basic"
-                label="Rental Rooms Owned"
-                variant="outlined"
-                name="owned"
-                value={formData.owned}
-                onChange={handleChange}
-                className='textfield'
-                sx={{
-                    "& .MuiOutlinedInput-root": {
-                        height: '40px',
-                        marginTop: '3px'
-                    },
-                }}
-            />
+            <div className='owning'>
+                    <Typography>Property Type</Typography>
+                    <FormControlLabel style={{ margin: '3px 15px 3px -3px' }}
+                        control={<Checkbox checked={formData.owned === 'Room'} onChange={handleChange} name="owned" value="Room" />}
+                        label="Room"
+                    />
+                    <FormControlLabel style={{ margin: '3px 20px 3px -3px' }}
+                        control={<Checkbox checked={formData.owned === 'Hostel'} onChange={handleChange} name="owned" value="Hostel" />}
+                        label="Hostel"
+                    />
+                    <FormControlLabel style={{ margin: '3px 15px 3px -3px' }}
+                        control={<Checkbox checked={formData.owned === 'Flat'} onChange={handleChange} name="owned" value="Flat" />}
+                        label="Flat"
+                    />
+                </div>
         </div>
     );
 }
@@ -546,6 +552,7 @@ const sampleColleges = ['Rashtrasant Tukadoji Maharaj Nagpur University',
 export function Form5({ formData, setFormData }) {
     const [collegesFields, setCollegeFields] = useState(formData.college || ['']);
     const [areaFields, setAreaFields] = useState(formData.area || ['']);
+    const [factFields, setFactFields] = useState(formData.fact || ['']);
     const [collegeSuggestions, setCollegeSuggestions] = useState(Array.from({ length: collegesFields.length }, () => []));
   
     const handleChange = (e, index, fieldArray, setFieldArray) => {
@@ -555,7 +562,7 @@ export function Form5({ formData, setFormData }) {
   
       setFormData({
         ...formData,
-        [fieldArray === collegesFields ? 'college' : 'area']: updatedFields,
+        [fieldArray === collegesFields ? 'college' : (fieldArray === areaFields ? 'area' : 'fact')]: updatedFields,
       });
   
       setFieldArray(updatedFields);
@@ -637,7 +644,7 @@ export function Form5({ formData, setFormData }) {
             {areaFields.map((area, index) => (
               <div key={index}>
                 <TextField
-                  placeholder="Hospitals, Medical Shop"
+                  placeholder="Kalmeshwar, Fetri, Yerla"
                   id={`outlined-basic-${index}`}
                   label={index === 0 ? "Area Near By" : ""}
                   variant="outlined"
@@ -673,15 +680,50 @@ export function Form5({ formData, setFormData }) {
               </div>
             ))}
           </div>
+          <div className="flex-filed">
+            {factFields.map((fact, index) => (
+              <div key={index}>
+                <TextField
+                  placeholder="Hospitals, Medical Shop, Bus stop"
+                  id={`outlined-basic-${index}`}
+                  label={index === 0 ? "Facilities Near By" : ""}
+                  variant="outlined"
+                  name={`fact-${index}`}
+                  value={fact}
+                  onChange={(e) => handleChange(e, index, factFields, setFactFields)}
+                  className='textfield'
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      height: '40px',
+                      marginTop: '0px'
+                    },
+                  }}
+                  InputProps={index === 0 && {
+                    endAdornment: (
+                      <button
+                        onClick={() => handleAddField(factFields, setFactFields)}
+                        style={{
+                          position: 'absolute',
+                          right: '8px',
+                          top: '50%',
+                          transform: 'translateY(-50%)',
+                          border: 'none',
+                          background: 'transparent',
+                          cursor: 'pointer',
+                        }}
+                      >
+                        <AddIcon />
+                      </button>
+                    ),
+                  }}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </>
     );
   }
-  
-
-
-
-
 
 
 

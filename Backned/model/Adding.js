@@ -22,8 +22,8 @@ const roomSchema = new Schema({
         required: true
     },
     owned: {
-        type: Number,
-        required: true
+        type: String,
+        enum: ['Room', 'Hostel','Flat']
     },
     address: {
         type: String,
@@ -43,7 +43,6 @@ const roomSchema = new Schema({
     },
     sharing: {
         type: String,
-        required: true
     },
     gender: {
         type: String,
@@ -81,6 +80,10 @@ const roomSchema = new Schema({
         // required: true
     },
     area: {
+        type: Array,
+        // required: true
+    },
+    fact: {
         type: Array,
         // required: true
     },

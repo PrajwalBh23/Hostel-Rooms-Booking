@@ -2,18 +2,86 @@ import Room from '../model/Adding.js';
 // import jwt from 'jsonwebtoken';
 
 export const getAllRooms = async (req, res, next) => {
-    let rooms;
-    try {
-        rooms = await Room.find();
-    } catch (err) {
-        console.log(err);
-        res.send("Hello Guys")
+  try {
+    const rooms = await Room.find({ owned: { $in: ['Room', 'Flat'] } });
+
+      if (!rooms || rooms.length === 0) {
+          return res.status(404).json({ message: "No rooms found" });
+      }
+
+      const formattedRooms = rooms.map(room => ({
+        price: room.price,
+        address: room.address,
+        experience:room.experience,
+        share: room.share,
+        sharing: room.sharing,
+        semiFurnished: room.semiFurnished,
+        gender: room.gender,
+        name: room.name,
+        // Add other properties as needed
+    }));
+
+    return res.status(200).json({ rooms: formattedRooms });
+  } catch (err) {
+      console.error(err);
+      return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+export const getAllHostels = async (req, res, next) => {
+  try {
+    const hostels = await Room.find({ owned: 'Hostel' });
+
+    if (!hostels || hostels.length === 0) {
+      return res.status(404).json({ message: "No hostel found" });
     }
-    if (!rooms) {
-        return res.status(404).json({ message: "No message found" });
-    }
-    return res.status(200).json({ rooms });
-}
+
+    const formattedHostels = hostels.map(hostel => ({
+      price: hostel.price,
+      address: hostel.address,
+      experience: hostel.experience,
+      share: hostel.share,
+      sharing: hostel.sharing,
+      semiFurnished: hostel.semiFurnished,
+      gender: hostel.gender,
+      name: hostel.name,
+      // Add other properties as needed
+    }));
+
+    return res.status(200).json({ hostels: formattedHostels });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+
+
+export const Seaching = async (req, res) => {
+  try {
+      const { searchOption, searchCollege } = req.body;
+
+      // Customize the logic based on your requirements
+      // For example, you might want to search for rooms that match the specified college
+
+      let searchQuery = {};
+
+      if (searchOption === 'option1') {
+          // Search by college name
+          searchQuery = { college: { $regex: new RegExp(searchCollege, 'i') } };
+      } else {
+          // Customize the logic for searching by area
+          // You can add similar logic based on your requirements
+      }
+
+      const searchResults = await Room.find(searchQuery);
+
+      res.status(200).json({ success: true, data: searchResults });
+  } catch (error) {
+      console.error('Error handling search:', error);
+      res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+};
 
 export const addRooms = async (req, res) => {
     try {

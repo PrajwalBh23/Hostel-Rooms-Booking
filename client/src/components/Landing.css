@@ -75,7 +75,7 @@
   border: 1px solid #ccc;
   border-radius: 18px;
   padding: 5px;
-  width: fit-content;
+  width: 600px;
   height: 50px;
   margin: 0 auto;
   font-size: larger;
@@ -93,16 +93,18 @@
 .search-container {
   display: flex;
   align-items: center;
-  /* border: 1px solid #ccc; */
   border-radius: 5px;
   margin-left: 10px;
   flex-grow: 1;
   height: 50px;
-  width: 500px;
+  width: 100%;
+  color: #000;
+  position: relative;
 }
 
-input[type="text"] {
+.search-input input {
   border: none;
+  width: 200%;
   outline: none;
   flex-grow: 1;
   padding: 5px;
@@ -127,9 +129,38 @@ i {
   position: relative;
   margin: -5px;
   margin-right: -6px;
-  width: 90px;
+  width: 120px;
   cursor: pointer;
 }
+
+.suggestions {
+  position: absolute;
+  top: 100%; /* Position it below the input */
+  left: 0;
+  z-index: 1;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  max-height: 150px;
+  overflow-y: auto;
+  width: 98%; /* Make the suggestions span the full width of the container */
+  font-weight: lighter;
+  font-style: normal;
+  font-size: medium;
+}
+
+.suggestions div {
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* Add the following to highlight the selected suggestion */
+.suggestions div:hover,
+.suggestions div:focus {
+  background-color: #f2f2f2;
+}
+
 .video-container{
   display: flex;
   flex-direction: row;
