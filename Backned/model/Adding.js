@@ -25,6 +25,9 @@ const roomSchema = new Schema({
         type: String,
         enum: ['Room', 'Hostel','Flat']
     },
+    hostelType: {
+        type: String,
+    },
     address: {
         type: String,
         required: true
@@ -34,7 +37,7 @@ const roomSchema = new Schema({
         required: true
     },
     price: {
-        type: String,
+        type: Number,
         required: true
     },
     share: {

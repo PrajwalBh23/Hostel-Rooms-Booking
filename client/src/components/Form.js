@@ -11,7 +11,8 @@ function FormContainer() {
         phone: '',
         email: '',
         experience: '',
-        owned: ''
+        owned: '',
+        hostelType:'',
     });
     const [formData2, setFormData2] = useState({
         address: '',
@@ -44,7 +45,14 @@ function FormContainer() {
     const nextStep = async () => {
         if (step === 1) {
             if (formData1.name && formData1.phone && formData1.email && formData1.experience && formData1.owned) {
-                setStep(step + 1);
+                if(formData1.owned === 'Hostel'){
+                    if(formData1.hostelType){
+                        setStep(step + 1);
+                    }
+                }
+                else{
+                    setStep(step + 1);
+                }
             }
         } else if (step === 2) {
             if (formData2.address && formData2.room && formData2.price && formData2.share && formData2.gender && formData2.deposit) {

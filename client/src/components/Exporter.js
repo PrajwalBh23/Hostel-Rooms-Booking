@@ -6,7 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 export function Form1({ formData, setFormData }) {
     const handleChange = (e) => {
-        const { name, value,type, checked } = e.target;
+        const { name, value, type, checked } = e.target;
         if (type === 'checkbox') {
             setFormData({
                 ...formData,
@@ -88,20 +88,49 @@ export function Form1({ formData, setFormData }) {
                 }}
             />
             <div className='owning'>
-                    <Typography>Property Type</Typography>
-                    <FormControlLabel style={{ margin: '3px 15px 3px -3px' }}
-                        control={<Checkbox checked={formData.owned === 'Room'} onChange={handleChange} name="owned" value="Room" />}
-                        label="Room"
-                    />
-                    <FormControlLabel style={{ margin: '3px 20px 3px -3px' }}
-                        control={<Checkbox checked={formData.owned === 'Hostel'} onChange={handleChange} name="owned" value="Hostel" />}
-                        label="Hostel"
-                    />
-                    <FormControlLabel style={{ margin: '3px 15px 3px -3px' }}
-                        control={<Checkbox checked={formData.owned === 'Flat'} onChange={handleChange} name="owned" value="Flat" />}
-                        label="Flat"
-                    />
-                </div>
+                <Typography>Property Type</Typography>
+                <FormControlLabel style={{ margin: '3px 15px 3px -3px' }}
+                    control={<Checkbox checked={formData.owned === 'Room'} onChange={handleChange} name="owned" value="Room" />}
+                    label="Room"
+                />
+                <FormControlLabel style={{ margin: '3px 20px 3px -3px' }}
+                    control={<Checkbox checked={formData.owned === 'Hostel'} onChange={handleChange} name="owned" value="Hostel" />}
+                    label="Hostel"
+                />
+                <FormControlLabel style={{ margin: '3px 15px 3px -3px' }}
+                    control={<Checkbox checked={formData.owned === 'Flat'} onChange={handleChange} name="owned" value="Flat" />}
+                    label="Flat"
+                />
+                {formData.owned === 'Hostel' && (
+                    <>
+                        <Typography>Hostel Type</Typography>
+                        <FormControlLabel
+                            style={{ margin: '3px 15px 3px -3px' }}
+                            control={
+                                <Checkbox
+                                    checked={formData.hostelType ==='Private'}
+                                    onChange={handleChange}
+                                    name="hostelType"
+                                    value="Private"
+                                />
+                            }
+                            label="Private"
+                        />
+                        <FormControlLabel
+                            style={{ margin: '3px 15px 3px -3px' }}
+                            control={
+                                <Checkbox
+                                    checked={formData.hostelType ==='Government'}
+                                    onChange={handleChange}
+                                    name="hostelType"
+                                    value="Government"
+                                />
+                            }
+                            label="Government"
+                        />
+                    </>
+                )}
+            </div>
         </div>
     );
 }
@@ -228,6 +257,10 @@ export function Form2({ formData, setFormData }) {
                     <FormControlLabel style={{ margin: '-3px' }}
                         control={<Checkbox checked={formData.deposit === '2 Deposit'} onChange={handleChange} name="deposit" value="2 Deposit" />}
                         label="2 Deposit"
+                    />
+                    <FormControlLabel style={{ margin: '-3px' }}
+                        control={<Checkbox checked={formData.deposit === '3 Deposit'} onChange={handleChange} name="deposit" value="3 Deposit" />}
+                        label="3 Deposit"
                     />
                 </div>
             </div>
@@ -554,176 +587,176 @@ export function Form5({ formData, setFormData }) {
     const [areaFields, setAreaFields] = useState(formData.area || ['']);
     const [factFields, setFactFields] = useState(formData.fact || ['']);
     const [collegeSuggestions, setCollegeSuggestions] = useState(Array.from({ length: collegesFields.length }, () => []));
-  
+
     const handleChange = (e, index, fieldArray, setFieldArray) => {
-      const { value } = e.target;
-      const updatedFields = [...fieldArray];
-      updatedFields[index] = value;
-  
-      setFormData({
-        ...formData,
-        [fieldArray === collegesFields ? 'college' : (fieldArray === areaFields ? 'area' : 'fact')]: updatedFields,
-      });
-  
-      setFieldArray(updatedFields);
-  
-      // Fetch and set suggestions
-      setCollegeSuggestions(suggestions => suggestions.map((_, i) =>
-        i === index && fieldArray === collegesFields ? sampleColleges.filter(college =>
-          college.toLowerCase().includes(value.toLowerCase())
-        ) : []
-      ));
+        const { value } = e.target;
+        const updatedFields = [...fieldArray];
+        updatedFields[index] = value;
+
+        setFormData({
+            ...formData,
+            [fieldArray === collegesFields ? 'college' : (fieldArray === areaFields ? 'area' : 'fact')]: updatedFields,
+        });
+
+        setFieldArray(updatedFields);
+
+        // Fetch and set suggestions
+        setCollegeSuggestions(suggestions => suggestions.map((_, i) =>
+            i === index && fieldArray === collegesFields ? sampleColleges.filter(college =>
+                college.toLowerCase().includes(value.toLowerCase())
+            ) : []
+        ));
     };
-  
+
     const handleAddField = (fieldArray, setFieldArray) => {
-      setFieldArray(fields => [...fields, '']);
-      setCollegeSuggestions(suggestions => [...suggestions, []]);
+        setFieldArray(fields => [...fields, '']);
+        setCollegeSuggestions(suggestions => [...suggestions, []]);
     };
-  
+
     const handleSuggestionClick = (suggestion, index, fieldArray, setFieldArray) => {
-      handleChange({ target: { value: suggestion } }, index, fieldArray, setFieldArray);
-      
-      // Close suggestions
-      setCollegeSuggestions(suggestions => suggestions.map((_, i) => i === index ? [] : []));
+        handleChange({ target: { value: suggestion } }, index, fieldArray, setFieldArray);
+
+        // Close suggestions
+        setCollegeSuggestions(suggestions => suggestions.map((_, i) => i === index ? [] : []));
     };
-  
+
     return (
-      <>
-        <h2 style={{ textAlign: 'center' }}>Near By Location</h2>
-        <div className='fact'>
-          <div className="flex-filed">
-            {collegesFields.map((college, index) => (
-              <div key={index} style={{ position: 'relative' }}>
-                <TextField
-                  placeholder="Near By Colleges"
-                  id={`outlined-basic-${index}`}
-                  label={index === 0 ? "Near By Colleges" : ""}
-                  variant="outlined"
-                  name={`college-${index}`}
-                  value={college}
-                  onChange={(e) => handleChange(e, index, collegesFields, setCollegeFields)}
-                  className='textfield'
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      height: '40px',
-                      marginTop: '0px',
-                    },
-                  }}
-                  InputProps={index === collegesFields.length - 1 && {
-                    endAdornment: (
-                      <button
-                        onClick={() => handleAddField(collegesFields, setCollegeFields)}
-                        style={{
-                          position: 'absolute',
-                          right: '8px',
-                          top: '50%',
-                          transform: 'translateY(-50%)',
-                          border: 'none',
-                          background: 'transparent',
-                          cursor: 'pointer',
-                        }}
-                      >
-                        <AddIcon />
-                      </button>
-                    ),
-                  }}
-                />
-                {index === collegesFields.length - 1 && collegeSuggestions[index].length > 0 && (
-                  <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 1, background: 'white', border: '1px solid #ddd', borderTop: 'none' }}>
-                    {collegeSuggestions[index].map((suggestion, i) => (
-                      <div key={i} style={{ padding: '8px', borderBottom: '1px solid #ddd', cursor: 'pointer' }} onClick={() => handleSuggestionClick(suggestion, index, collegesFields, setCollegeFields)}>
-                        {suggestion}
-                      </div>
+        <>
+            <h2 style={{ textAlign: 'center' }}>Near By Location</h2>
+            <div className='fact'>
+                <div className="flex-filed">
+                    {collegesFields.map((college, index) => (
+                        <div key={index} style={{ position: 'relative' }}>
+                            <TextField
+                                placeholder="Near By Colleges"
+                                id={`outlined-basic-${index}`}
+                                label={index === 0 ? "Near By Colleges" : ""}
+                                variant="outlined"
+                                name={`college-${index}`}
+                                value={college}
+                                onChange={(e) => handleChange(e, index, collegesFields, setCollegeFields)}
+                                className='textfield'
+                                sx={{
+                                    "& .MuiOutlinedInput-root": {
+                                        height: '40px',
+                                        marginTop: '0px',
+                                    },
+                                }}
+                                InputProps={index === collegesFields.length - 1 && {
+                                    endAdornment: (
+                                        <button
+                                            onClick={() => handleAddField(collegesFields, setCollegeFields)}
+                                            style={{
+                                                position: 'absolute',
+                                                right: '8px',
+                                                top: '50%',
+                                                transform: 'translateY(-50%)',
+                                                border: 'none',
+                                                background: 'transparent',
+                                                cursor: 'pointer',
+                                            }}
+                                        >
+                                            <AddIcon />
+                                        </button>
+                                    ),
+                                }}
+                            />
+                            {index === collegesFields.length - 1 && collegeSuggestions[index].length > 0 && (
+                                <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 1, background: 'white', border: '1px solid #ddd', borderTop: 'none' }}>
+                                    {collegeSuggestions[index].map((suggestion, i) => (
+                                        <div key={i} style={{ padding: '8px', borderBottom: '1px solid #ddd', cursor: 'pointer' }} onClick={() => handleSuggestionClick(suggestion, index, collegesFields, setCollegeFields)}>
+                                            {suggestion}
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
                     ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-          <div className="flex-filed">
-            {areaFields.map((area, index) => (
-              <div key={index}>
-                <TextField
-                  placeholder="Kalmeshwar, Fetri, Yerla"
-                  id={`outlined-basic-${index}`}
-                  label={index === 0 ? "Area Near By" : ""}
-                  variant="outlined"
-                  name={`area-${index}`}
-                  value={area}
-                  onChange={(e) => handleChange(e, index, areaFields, setAreaFields)}
-                  className='textfield'
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      height: '40px',
-                      marginTop: '0px'
-                    },
-                  }}
-                  InputProps={index === 0 && {
-                    endAdornment: (
-                      <button
-                        onClick={() => handleAddField(areaFields, setAreaFields)}
-                        style={{
-                          position: 'absolute',
-                          right: '8px',
-                          top: '50%',
-                          transform: 'translateY(-50%)',
-                          border: 'none',
-                          background: 'transparent',
-                          cursor: 'pointer',
-                        }}
-                      >
-                        <AddIcon />
-                      </button>
-                    ),
-                  }}
-                />
-              </div>
-            ))}
-          </div>
-          <div className="flex-filed">
-            {factFields.map((fact, index) => (
-              <div key={index}>
-                <TextField
-                  placeholder="Hospitals, Medical Shop, Bus stop"
-                  id={`outlined-basic-${index}`}
-                  label={index === 0 ? "Facilities Near By" : ""}
-                  variant="outlined"
-                  name={`fact-${index}`}
-                  value={fact}
-                  onChange={(e) => handleChange(e, index, factFields, setFactFields)}
-                  className='textfield'
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      height: '40px',
-                      marginTop: '0px'
-                    },
-                  }}
-                  InputProps={index === 0 && {
-                    endAdornment: (
-                      <button
-                        onClick={() => handleAddField(factFields, setFactFields)}
-                        style={{
-                          position: 'absolute',
-                          right: '8px',
-                          top: '50%',
-                          transform: 'translateY(-50%)',
-                          border: 'none',
-                          background: 'transparent',
-                          cursor: 'pointer',
-                        }}
-                      >
-                        <AddIcon />
-                      </button>
-                    ),
-                  }}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </>
+                </div>
+                <div className="flex-filed">
+                    {areaFields.map((area, index) => (
+                        <div key={index}>
+                            <TextField
+                                placeholder="Kalmeshwar, Fetri, Yerla"
+                                id={`outlined-basic-${index}`}
+                                label={index === 0 ? "Area Near By" : ""}
+                                variant="outlined"
+                                name={`area-${index}`}
+                                value={area}
+                                onChange={(e) => handleChange(e, index, areaFields, setAreaFields)}
+                                className='textfield'
+                                sx={{
+                                    "& .MuiOutlinedInput-root": {
+                                        height: '40px',
+                                        marginTop: '0px'
+                                    },
+                                }}
+                                InputProps={index === 0 && {
+                                    endAdornment: (
+                                        <button
+                                            onClick={() => handleAddField(areaFields, setAreaFields)}
+                                            style={{
+                                                position: 'absolute',
+                                                right: '8px',
+                                                top: '50%',
+                                                transform: 'translateY(-50%)',
+                                                border: 'none',
+                                                background: 'transparent',
+                                                cursor: 'pointer',
+                                            }}
+                                        >
+                                            <AddIcon />
+                                        </button>
+                                    ),
+                                }}
+                            />
+                        </div>
+                    ))}
+                </div>
+                <div className="flex-filed">
+                    {factFields.map((fact, index) => (
+                        <div key={index}>
+                            <TextField
+                                placeholder="Hospitals, Medical Shop, Bus stop"
+                                id={`outlined-basic-${index}`}
+                                label={index === 0 ? "Facilities Near By" : ""}
+                                variant="outlined"
+                                name={`fact-${index}`}
+                                value={fact}
+                                onChange={(e) => handleChange(e, index, factFields, setFactFields)}
+                                className='textfield'
+                                sx={{
+                                    "& .MuiOutlinedInput-root": {
+                                        height: '40px',
+                                        marginTop: '0px'
+                                    },
+                                }}
+                                InputProps={index === 0 && {
+                                    endAdornment: (
+                                        <button
+                                            onClick={() => handleAddField(factFields, setFactFields)}
+                                            style={{
+                                                position: 'absolute',
+                                                right: '8px',
+                                                top: '50%',
+                                                transform: 'translateY(-50%)',
+                                                border: 'none',
+                                                background: 'transparent',
+                                                cursor: 'pointer',
+                                            }}
+                                        >
+                                            <AddIcon />
+                                        </button>
+                                    ),
+                                }}
+                            />
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </>
     );
-  }
+}
 
 
 

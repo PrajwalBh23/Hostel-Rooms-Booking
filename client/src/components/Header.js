@@ -173,7 +173,6 @@ function Header() {
                         <select className='Selecting' onChange={handleSearchInputChange}>
                             <option value="option1">Rooms</option>
                             <option value="option2">Hostels</option>
-                            <option value="option3">Flats</option>
                         </select>
                     </div>
                     <div className='margin-spac'>
