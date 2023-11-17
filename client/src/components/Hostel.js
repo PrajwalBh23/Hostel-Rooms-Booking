@@ -215,7 +215,7 @@ function Hostels() {
                                             <div className="address">{hostel.address}</div>
 
                                             <div className="buttons">
-                                                <button className='button2'>{hostel.share}-{hostel.sharing}</button>
+                                                <button className='button2'>{hostel.share} - {hostel.sharing}</button>
                                                 <button className='button2'>{hostel.semiFurnished}</button>
                                                 <button className='button2'>{hostel.gender}</button>
                                             </div>

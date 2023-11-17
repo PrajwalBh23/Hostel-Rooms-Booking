@@ -224,7 +224,7 @@ function Rooms() {
                                             <div className="address">{room.address}</div>
 
                                             <div className="buttons">
-                                                <button className='button2'>{room.share}-{room.sharing}</button>
+                                                <button className='button2'>{room.share} - {room.sharing}</button>
                                                 <button className='button2'>{room.semiFurnished}</button>
                                                 <button className='button2'>{room.gender}</button>
                                             </div>
