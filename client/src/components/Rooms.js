@@ -205,6 +205,7 @@ function Rooms() {
                             </div>
                         </div>
                     </Typography>
+                    
                     <Typography sx={{ fontFamily: "fantasy" }} width={"75%"} variant="h2" height={'100%'}>
 
 

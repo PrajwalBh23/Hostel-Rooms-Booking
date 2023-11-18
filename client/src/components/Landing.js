@@ -133,16 +133,16 @@ function Landing() {
         };
 
         // Make a POST request to your backend endpoint
-        axios.post('http://localhost:5000/stay/search', searchData)
+        axios.post('http://localhost:5000/stay/store', searchData)
             .then(response => {
                 // Handle the response from the backend
                 console.log('Backend response:', response.data);
+                window.location.href = '/roomsresult';
             })
             .catch(error => {
                 // Handle errors
                 console.error('Error sending data to backend:', error);
             });
-            window.location.href = '/roomsresult';
     };
 
     useEffect(() => {

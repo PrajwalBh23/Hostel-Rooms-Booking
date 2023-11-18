@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { AppBar, Tabs, Tab, Toolbar, Typography } from '@mui/material';
 import logo from '../images/Logo5.png';
 import CustomizedMenus from './Dropdown.js';
@@ -87,10 +87,11 @@ const collegeList = [
 function Header() {
     const [searchOption, setSearchOption] = useState('option1');
     const [searchCollege, setSearchCollege] = useState('');
-    const [searchValue, setSearchValue] = useState('');
     const [collegeSuggestions, setCollegeSuggestions] = useState([]);
+    const [propertyType, setPropertyType] = useState('Room'); // Added state for propertyType
 
     const handleSearchOptionChange = (e) => {
+        setPropertyType(e.target.value);
         setSearchOption(e.target.value);
         setSearchCollege('');
         setCollegeSuggestions([]);
@@ -108,10 +109,11 @@ function Header() {
         setCollegeSuggestions(filteredColleges);
     };
 
-    const handleSearchInputChange = (e) => {
-        setSearchValue(e.target.value);
+    const handlePropertyTypeChange = (e) => {
+        const newPropertyType = e.target.value;
+        setPropertyType(newPropertyType);
     };
-    
+
     const handleCollegeSelect = (selectedCollege) => {
         setSearchCollege(selectedCollege);
         setCollegeSuggestions([]);
@@ -119,40 +121,30 @@ function Header() {
 
     const handleSearch = () => {
         const searchData = {
-            searchOption,
-            searchValue,
+          searchOption,
+          searchCollege,
+          propertyType,
         };
-
-        // Make a POST request to your backend endpoint
-        axios.post('http://localhost:5000/stay/search', searchData)
-            .then(response => {
-                // Handle the response from the backend
-                console.log('Backend response:', response.data);
-                // You can use the response data as needed
-            })
-            .catch(error => {
-                // Handle errors
-                console.error('Error sending data to backend:', error);
-            });
-    };
-    useEffect(() => {
-        // Add event listener to close suggestions on clicking outside the input area
-        const handleClickOutside = (e) => {
-            const searchContainer = document.querySelector('.search-container');
-            if (searchContainer && !searchContainer.contains(e.target)) {
-                // Click is outside the search container, close suggestions
-                setCollegeSuggestions([]);
+      
+        console.log('Sending data to backend:', searchData);  // Add this line
+      
+        axios.post('http://localhost:5000/stay/storeit', searchData)
+          .then(response => {
+            // Handle the response from the backend
+            console.log('Backend response:', response.data);
+            // You can use the response data as needed
+            if (propertyType === 'Room') {
+              window.location.href = '/roomsresult';
+            } else {
+              window.location.href = '/hostelsresult';
             }
-        };
+          })
+          .catch(error => {
+            // Handle errors
+            console.error('Error sending data to backend:', error);
+          });
 
-        // Attach the event listener
-        document.addEventListener('click', handleClickOutside);
-
-        // Cleanup the event listener on component unmount
-        return () => {
-            document.removeEventListener('click', handleClickOutside);
-        };
-    }, []);
+    };
 
     return (
         <>
@@ -170,9 +162,9 @@ function Header() {
                         </Typography>
                     </div>
                     <div className='marginleft'>
-                        <select className='Selecting' onChange={handleSearchInputChange}>
-                            <option value="option1">Rooms</option>
-                            <option value="option2">Hostels</option>
+                        <select className='Selecting' onChange={handlePropertyTypeChange}>
+                            <option value="Room">Rooms</option>
+                            <option value="Hostel">Hostels</option>
                         </select>
                     </div>
                     <div className='margin-spac'>

@@ -66,8 +66,6 @@ export const getAllRooms = async (req, res, next) => {
   }
 };
 
-
-
 export const getAllHostels = async (req, res, next) => {
   try {
     let filter = { owned: 'Hostel' };
@@ -142,31 +140,254 @@ export const getAllHostels = async (req, res, next) => {
 
 
 
-export const Seaching = async (req, res) => {
+
+
+
+
+
+let saveOption;
+let saveCollege;
+let savePropertyType;
+
+export const Storing = (req, res, next) => {
   try {
+    console.log('Storing function reached!');
     const { searchOption, searchCollege } = req.body;
+    console.log('Received data in Storing:', req.body);  // Add this line
+    saveOption = searchOption;
+    saveCollege = searchCollege;
+    next();
+  } catch (error) {
+    console.error('Error setting global variables:', error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+};
 
-    // Customize the logic based on your requirements
-    // For example, you might want to search for rooms that match the specified college
 
+export const StoreIt = (req, res, next) => {
+  try {
+    const { searchOption, searchCollege, savePropertyType: propertyType } = req.body;
+    console.log('Received data in StoreIt:', req.body);
+    saveOption = searchOption;
+    saveCollege = searchCollege;
+    // Use the variable 'propertyType' instead of 'savePropertyType'
+    savePropertyType = propertyType;
+    next();
+  } catch (error) {
+    console.error('Error setting global variables:', error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+};
+
+
+
+// export const Searching = async (req, res) => {
+//   try {
+//     let searchQuery = {};
+
+//     console.log(saveCollege);
+//     console.log(saveOption);
+//     if (saveOption === 'option1') {
+//       // Search by exact college name
+//       searchQuery = { college: { $in: [saveCollege] } };
+//     } else {
+//       searchQuery = { area: { $in: [saveCollege] } };
+//     }
+
+//     let filter = { owned: 'Room' };
+
+//     // Check if propertyType is present in query parameters
+//     if (req.query.share) {
+//       filter.share = { $in: req.query.share };
+//     }
+//     if (req.query.hostelType) {
+//       filter.hostelType = { $in: req.query.hostelType };
+//     }
+//     if (req.query.gender) {
+//       filter.gender = { $in: req.query.gender };
+//     }
+//     if (req.query.semiFurnished) {
+//       filter.semiFurnished = { $in: req.query.semiFurnished };
+//     }
+//     if (req.query.deposit) {
+//       filter.deposit = { $in: req.query.deposit };
+//     }
+
+//     if (req.query.price) {
+//       // Parse the price range and update the filter accordingly
+//       switch (req.query.price) {
+//         case '1000-2000':
+//           filter.price = { $gte: 1000, $lt: 2000 };
+//           break;
+//         case '2000-3000':
+//           filter.price = { $gte: 2000, $lt: 3000 };
+//           break;
+//         case '3000-5000':
+//           filter.price = { $gte: 3000, $lt: 5000 };
+//           break;
+//         case 'More than 5000':
+//           filter.price = { $gte: 5000 };
+//           break;
+//         default:
+//           // Handle unknown price range or set a default behavior
+//           break;
+//       }
+//     }
+
+//     // Merge the searchQuery and filter objects
+//     const mergedQuery = { ...searchQuery, ...filter };
+
+//     const searchResults = await Room.find(mergedQuery);
+
+//     if (!searchResults || searchResults.length === 0) {
+//       return res.status(404).json({ message: "No stays found" });
+//     }
+
+//     const formattedSearchResults = searchResults.map(stay => ({
+//       // Map the properties you need for the frontend
+//       price: stay.price,
+//       address: stay.address,
+//       experience: stay.experience,
+//       share: stay.share,
+//       sharing: stay.sharing,
+//       semiFurnished: stay.semiFurnished,
+//       gender: stay.gender,
+//       name: stay.name,
+//       hostelType: stay.hostelType,
+//       // Add other properties as needed
+//     }));
+//     console.log(formattedSearchResults);
+//     return res.status(200).json({ stays: formattedSearchResults });
+//   } catch (error) {
+//     console.error('Error handling search:', error);
+//     res.status(500).json({ success: false, message: 'Internal Server Error' });
+//   }
+// };
+
+export const Searching = async (req, res) => {
+  try {
     let searchQuery = {};
-
-    if (searchOption === 'option1') {
-      // Search by college name
-      searchQuery = { college: { $regex: new RegExp(searchCollege, 'i') } };
+    // Check if saveCollege and saveOption are defined
+    if (!saveCollege || !saveOption) {
+      return res.status(400).json({ message: "Missing search parameters" });
+    }
+    if (saveOption === 'option1') {
+      // Search by exact college name
+      searchQuery = { college: { $in: [saveCollege] } };
     } else {
-      // Customize the logic for searching by area
-      // You can add similar logic based on your requirements
+      const areaRegex = new RegExp(saveCollege, 'i');
+      const addressRegex = new RegExp(saveCollege, 'i');
+      searchQuery = {
+        $or: [
+          { area: { $elemMatch: { $regex: areaRegex } } },
+          { address: { $regex: addressRegex } },
+        ],
+      };
     }
 
     const searchResults = await Room.find(searchQuery);
 
-    res.status(200).json({ success: true, data: searchResults });
+    if (!searchResults || searchResults.length === 0) {
+      return res.status(404).json({ message: "No stays found" });
+    }
+
+    let filter;
+    if (savePropertyType === 'Room') {
+      filter = { owned: 'Room' };
+    } else {
+      filter = { owned: 'Hostel' };
+    }
+    // Check if propertyType is present in query parameters
+    if (req.query.share) {
+      filter.share = { $in: req.query.share };
+    }
+    if (req.query.hostelType) {
+      filter.hostelType = { $in: req.query.hostelType };
+    }
+    if (req.query.gender) {
+      filter.gender = { $in: req.query.gender };
+    }
+    if (req.query.semiFurnished) {
+      filter.semiFurnished = { $in: req.query.semiFurnished };
+    }
+    if (req.query.deposit) {
+      filter.deposit = { $in: req.query.deposit };
+    }
+
+    if (req.query.price) {
+      // Parse the price range and update the filter accordingly
+      switch (req.query.price) {
+        case '1000-2000':
+          filter.price = { $gte: 1000, $lt: 2000 };
+          break;
+        case '2000-3000':
+          filter.price = { $gte: 2000, $lt: 3000 };
+          break;
+        case '3000-5000':
+          filter.price = { $gte: 3000, $lt: 5000 };
+          break;
+        case 'More than 5000':
+          filter.price = { $gte: 5000 };
+          break;
+        default:
+          // Handle unknown price range or set a default behavior
+          break;
+      }
+    }
+
+    // Apply filters to the search results
+    const filteredResults = searchResults.filter(stay => {
+      if (
+        (!filter.share || filter.share.$in.includes(stay.share)) &&
+        (!filter.hostelType || filter.hostelType.$in.includes(stay.hostelType)) &&
+        (!filter.gender || filter.gender.$in.includes(stay.gender)) &&
+        (!filter.semiFurnished || filter.semiFurnished.$in.includes(stay.semiFurnished)) &&
+        (!filter.deposit || filter.deposit.$in.includes(stay.deposit)) &&
+        (!filter.price || (stay.price >= filter.price.$gte && stay.price < filter.price.$lt))
+      ) {
+        return true;
+      }
+      return false;
+    });
+
+    if (filteredResults.length === 0) {
+      return res.status(404).json({ message: "No stays found after filtering" });
+    }
+
+    const formattedSearchResults = filteredResults.map(stay => ({
+      // Map the properties you need for the frontend
+      price: stay.price,
+      address: stay.address,
+      experience: stay.experience,
+      share: stay.share,
+      sharing: stay.sharing,
+      semiFurnished: stay.semiFurnished,
+      gender: stay.gender,
+      name: stay.name,
+      hostelType: stay.hostelType,
+      // Add other properties as needed
+    }));
+
+    return res.status(200).json({ stays: formattedSearchResults });
   } catch (error) {
     console.error('Error handling search:', error);
     res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export const addRooms = async (req, res) => {
   try {
