@@ -6,12 +6,18 @@ import Checkbox from '@mui/material/Checkbox';
 import house from '../images/House_sample.jpg'
 import map from '../images/map1.jpeg'
 import VerifiedRoundedIcon from '@mui/icons-material/VerifiedRounded';
+import { useLocation } from 'react-router-dom';
+
 
 function RoomResults() {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     const [roomData, setRoomData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const location = useLocation();
+    const { searchOption, searchCollege } = location.state;
+    // const [backendSearchOptionValue, setBackendSearchOptionValue] = useState('');
+    // const [backendSearchCollegeValue, setBackendSearchCollegeValue] = useState('');
     const [filters, setFilters] = useState({
         share: [],
         gender: [],
@@ -19,25 +25,35 @@ function RoomResults() {
         deposit: [],
         price: [],
     });
-
     useEffect(() => {
+        console.log(searchOption);
+        console.log(searchCollege);
+
         const fetchData = async () => {
             setLoading(true);
             setError(null);
 
             try {
-                const queryParams = new URLSearchParams(filters);
-                const response = await axios.get(`http://localhost:5000/stay/show?${queryParams}`);
+                const response = await axios.get(`http://localhost:5000/stay/search?searchOption=${searchOption}&searchCollege=${searchCollege}`, {
+                    params: {
+                        ...filters,
+                    }
+                });
+
                 setRoomData(response.data.stays);
             } catch (error) {
                 setError('No Result Found');
-                console.error('Error fetching room data from backend:', error);
+                console.error('Shit, fetching room data from backend:', error);
             } finally {
                 setLoading(false);
             }
         };
+
         fetchData();
-    }, [filters]);
+    }, [filters, searchCollege, searchOption]);
+
+
+
 
     const handleCheckboxChange = (filterType, value) => {
         setFilters((prevFilters) => ({
@@ -59,7 +75,7 @@ function RoomResults() {
             <div>
                 <Box display="flex" marginTop="7%" width="100%" flexDirection="row">
                     <Typography sx={{ fontFamily: "fantasy" }} width={"25%"} >
-                    <div className="filter">
+                        <div className="filter">
                             <div className="main"><h2>Filters</h2></div>
                             <div className="contain">
                                 <div className="head">Property Type</div>
@@ -207,10 +223,11 @@ function RoomResults() {
                             <div>Loading...</div>
                         ) : error ? (
                             <div className="no-results">{error}</div>
-                        ) : roomData.length === 0 ? (
+                        ) : !roomData || roomData.length === 0 ? (
                             <div className="no-results">No results found</div>
                         ) : (
                             roomData.map((room, index) => (
+
                                 <div key={index} className="result">
 
 

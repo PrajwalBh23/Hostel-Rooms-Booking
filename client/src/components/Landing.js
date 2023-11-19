@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Tabs, Tab, Toolbar, Typography, TextField, Button } from '@mui/material';
 import logo from '../images/Logo5.png';
@@ -12,6 +12,7 @@ import PinterestIcon from '@mui/icons-material/Pinterest';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import home from '../images/home.jpg';
 import pg from '../images/pg.jpg';
+import { useNavigate } from 'react-router-dom';
 
 
 import Rating from '@mui/material/Rating';
@@ -98,6 +99,7 @@ const collegeList = [
 ];
 
 function Landing() {
+    const navigate = useNavigate();
     const [value, setValue] = useState(0);
     const [searchOption, setSearchOption] = useState('option1');
     const [searchCollege, setSearchCollege] = useState('');
@@ -125,25 +127,11 @@ function Landing() {
         setSearchCollege(selectedCollege);
         setCollegeSuggestions([]);
     };
-
+    
     const handleSearch = () => {
-        const searchData = {
-            searchOption,
-            searchCollege,
-        };
-
-        // Make a POST request to your backend endpoint
-        axios.post('http://localhost:5000/stay/store', searchData)
-            .then(response => {
-                // Handle the response from the backend
-                console.log('Backend response:', response.data);
-                window.location.href = '/roomsresult';
-            })
-            .catch(error => {
-                // Handle errors
-                console.error('Error sending data to backend:', error);
-            });
+        navigate('/roomsresult', { state: { searchOption, searchCollege } });
     };
+    
 
     useEffect(() => {
         // Add event listener to close suggestions on clicking outside the input area

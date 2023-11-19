@@ -128,7 +128,7 @@ function Header() {
       
         console.log('Sending data to backend:', searchData);  // Add this line
       
-        axios.post('http://localhost:5000/stay/storeit', searchData)
+        axios.post('http://localhost:5000/stay/search', searchData)
           .then(response => {
             // Handle the response from the backend
             console.log('Backend response:', response.data);

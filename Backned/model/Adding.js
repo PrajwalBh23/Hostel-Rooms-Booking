@@ -79,7 +79,7 @@ const roomSchema = new Schema({
         // required: true
     },
     college: {
-        type: Array,
+        type: [String],
         // required: true
     },
     area: {

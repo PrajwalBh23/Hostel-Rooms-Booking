@@ -144,54 +144,17 @@ export const getAllHostels = async (req, res, next) => {
 
 
 
-
-let saveOption;
-let saveCollege;
-let savePropertyType;
-
-export const Storing = (req, res, next) => {
-  try {
-    console.log('Storing function reached!');
-    const { searchOption, searchCollege } = req.body;
-    console.log('Received data in Storing:', req.body);  // Add this line
-    saveOption = searchOption;
-    saveCollege = searchCollege;
-    next();
-  } catch (error) {
-    console.error('Error setting global variables:', error);
-    res.status(500).json({ success: false, message: 'Internal Server Error' });
-  }
-};
-
-
-export const StoreIt = (req, res, next) => {
-  try {
-    const { searchOption, searchCollege, savePropertyType: propertyType } = req.body;
-    console.log('Received data in StoreIt:', req.body);
-    saveOption = searchOption;
-    saveCollege = searchCollege;
-    // Use the variable 'propertyType' instead of 'savePropertyType'
-    savePropertyType = propertyType;
-    next();
-  } catch (error) {
-    console.error('Error setting global variables:', error);
-    res.status(500).json({ success: false, message: 'Internal Server Error' });
-  }
-};
-
-
-
 // export const Searching = async (req, res) => {
 //   try {
 //     let searchQuery = {};
 
-//     console.log(saveCollege);
-//     console.log(saveOption);
-//     if (saveOption === 'option1') {
+//     console.log(searchCollege);
+//     console.log(searchOption);
+//     if (searchOption === 'option1') {
 //       // Search by exact college name
-//       searchQuery = { college: { $in: [saveCollege] } };
+//       searchQuery = { college: { $in: [searchCollege] } };
 //     } else {
-//       searchQuery = { area: { $in: [saveCollege] } };
+//       searchQuery = { area: { $in: [searchCollege] } };
 //     }
 
 //     let filter = { owned: 'Room' };
@@ -264,19 +227,28 @@ export const StoreIt = (req, res, next) => {
 //   }
 // };
 
+
 export const Searching = async (req, res) => {
   try {
+    const { searchOption, searchCollege } = req.query;
+
     let searchQuery = {};
-    // Check if saveCollege and saveOption are defined
-    if (!saveCollege || !saveOption) {
+
+    
+    console.log(searchOption);
+    console.log(searchCollege);
+
+    // Check if searchCollege and searchOption are defined
+    if (!searchCollege || !searchOption) {
       return res.status(400).json({ message: "Missing search parameters" });
     }
-    if (saveOption === 'option1') {
+
+    if (searchOption === 'option1') {
       // Search by exact college name
-      searchQuery = { college: { $in: [saveCollege] } };
+      searchQuery = { college: { $in: [searchCollege] } };
     } else {
-      const areaRegex = new RegExp(saveCollege, 'i');
-      const addressRegex = new RegExp(saveCollege, 'i');
+      const areaRegex = new RegExp(searchCollege, 'i');
+      const addressRegex = new RegExp(searchCollege, 'i');
       searchQuery = {
         $or: [
           { area: { $elemMatch: { $regex: areaRegex } } },
@@ -291,13 +263,9 @@ export const Searching = async (req, res) => {
       return res.status(404).json({ message: "No stays found" });
     }
 
-    let filter;
-    if (savePropertyType === 'Room') {
-      filter = { owned: 'Room' };
-    } else {
-      filter = { owned: 'Hostel' };
-    }
-    // Check if propertyType is present in query parameters
+    let filter = { owned: 'Room' };
+
+    // Check if any filter is present in query parameters
     if (req.query.share) {
       filter.share = { $in: req.query.share };
     }
@@ -327,7 +295,7 @@ export const Searching = async (req, res) => {
           filter.price = { $gte: 3000, $lt: 5000 };
           break;
         case 'More than 5000':
-          filter.price = { $gte: 5000 };
+          filter.price = { $gte: 5000, $lt: 1000000 };
           break;
         default:
           // Handle unknown price range or set a default behavior
@@ -349,6 +317,7 @@ export const Searching = async (req, res) => {
       }
       return false;
     });
+    
 
     if (filteredResults.length === 0) {
       return res.status(404).json({ message: "No stays found after filtering" });
@@ -368,12 +337,15 @@ export const Searching = async (req, res) => {
       // Add other properties as needed
     }));
 
+
     return res.status(200).json({ stays: formattedSearchResults });
   } catch (error) {
     console.error('Error handling search:', error);
     res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 };
+
+
 
 
 
