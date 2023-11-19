@@ -227,16 +227,21 @@ export const getAllHostels = async (req, res, next) => {
 //   }
 // };
 
+let searchOption1;
+let searchColleges;
 
 export const Searching = async (req, res) => {
   try {
-    const { searchOption, searchCollege } = req.query;
+    const { searchOption, searchCollege, getpropertyType } = req.query;
 
     let searchQuery = {};
+    let filter;
 
-    
     console.log(searchOption);
     console.log(searchCollege);
+    console.log(getpropertyType);
+
+    const propertyType = getpropertyType || 'room';
 
     // Check if searchCollege and searchOption are defined
     if (!searchCollege || !searchOption) {
@@ -256,14 +261,28 @@ export const Searching = async (req, res) => {
         ],
       };
     }
+    if (propertyType === 'room') {
+      filter = { owned: { $in: ['Room', 'Flat'] } };
+    } else {
+      filter = { owned: 'Hostel' };
+    }
 
     const searchResults = await Room.find(searchQuery);
 
-    if (!searchResults || searchResults.length === 0) {
-      return res.status(404).json({ message: "No stays found" });
-    }
 
-    let filter = { owned: 'Room' };
+    // if (!filteredResults || filteredResults.length === 0) {
+    //   return res.status(404).json({ message: "No stays found" });
+    // }
+
+    let filteredResults;
+
+    if (propertyType === 'room' || propertyType === 'flat') {
+      filteredResults = searchResults.filter(stay => filter.owned.$in.includes(stay.owned));
+    } else if (propertyType === 'hostel') {
+      filteredResults = searchResults.filter(stay => filter.owned === stay.owned);
+    } else {
+      return res.status(400).json({ message: "Invalid property type" });
+    }
 
     // Check if any filter is present in query parameters
     if (req.query.share) {
@@ -304,7 +323,7 @@ export const Searching = async (req, res) => {
     }
 
     // Apply filters to the search results
-    const filteredResults = searchResults.filter(stay => {
+    const finalResults = filteredResults.filter(stay => {
       if (
         (!filter.share || filter.share.$in.includes(stay.share)) &&
         (!filter.hostelType || filter.hostelType.$in.includes(stay.hostelType)) &&
@@ -317,13 +336,13 @@ export const Searching = async (req, res) => {
       }
       return false;
     });
-    
 
-    if (filteredResults.length === 0) {
+
+    if (finalResults.length === 0) {
       return res.status(404).json({ message: "No stays found after filtering" });
     }
 
-    const formattedSearchResults = filteredResults.map(stay => ({
+    const formattedSearchResults = finalResults.map(stay => ({
       // Map the properties you need for the frontend
       price: stay.price,
       address: stay.address,
@@ -344,6 +363,7 @@ export const Searching = async (req, res) => {
     res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 };
+
 
 
 

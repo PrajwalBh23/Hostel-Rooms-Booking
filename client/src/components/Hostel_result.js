@@ -8,38 +8,53 @@ import Checkbox from '@mui/material/Checkbox';
 import house from '../images/House_sample.jpg'
 import VerifiedRoundedIcon from '@mui/icons-material/VerifiedRounded';
 import map from '../images/map1.jpeg'
+import { useLocation } from 'react-router-dom';
 
 function HostelResults() {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     const [hostelData, setHostelData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const location = useLocation();
+    const { searchOption, searchCollege, propertyType } = location.state;
+    // const [backendSearchOptionValue, setBackendSearchOptionValue] = useState('');
+    // const [backendSearchCollegeValue, setBackendSearchCollegeValue] = useState('');
     const [filters, setFilters] = useState({
         share: [],
         gender: [],
         semiFurnished: [],
         deposit: [],
         price: [],
+        hostelType: [], // Add this line to initialize hostelType as an empty array
     });
+    
 
     useEffect(() => {
+        console.log(searchOption);
+        console.log(searchCollege);
+
         const fetchData = async () => {
             setLoading(true);
             setError(null);
 
             try {
-                const queryParams = new URLSearchParams(filters);
-                const response = await axios.get(`http://localhost:5000/stay/show?${queryParams}`);
+                const response = await axios.get(`http://localhost:5000/stay/search?propertyType=${propertyType}&searchOption=${searchOption}&searchCollege=${searchCollege}`, {
+                    params: {
+                        ...filters,
+                    }
+                });
+
                 setHostelData(response.data.stays);
             } catch (error) {
                 setError('No Result Found');
-                console.error('Error fetching room data from backend:', error);
+                console.error('Shit, fetching room data from backend:', error);
             } finally {
                 setLoading(false);
             }
         };
+
         fetchData();
-    }, [filters]);
+    }, [filters, searchCollege, searchOption, propertyType]);
 
     const handleCheckboxChange = (filterType, value) => {
         setFilters((prevFilters) => ({

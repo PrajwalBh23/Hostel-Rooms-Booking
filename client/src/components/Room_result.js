@@ -15,7 +15,7 @@ function RoomResults() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const location = useLocation();
-    const { searchOption, searchCollege } = location.state;
+    const { searchOption, searchCollege, propertyType  } = location.state;
     // const [backendSearchOptionValue, setBackendSearchOptionValue] = useState('');
     // const [backendSearchCollegeValue, setBackendSearchCollegeValue] = useState('');
     const [filters, setFilters] = useState({
@@ -34,7 +34,7 @@ function RoomResults() {
             setError(null);
 
             try {
-                const response = await axios.get(`http://localhost:5000/stay/search?searchOption=${searchOption}&searchCollege=${searchCollege}`, {
+                const response = await axios.get(`http://localhost:5000/stay/search?propertyType=${propertyType}&searchOption=${searchOption}&searchCollege=${searchCollege}`, {
                     params: {
                         ...filters,
                     }
@@ -50,7 +50,7 @@ function RoomResults() {
         };
 
         fetchData();
-    }, [filters, searchCollege, searchOption]);
+    }, [filters, searchCollege, searchOption, propertyType]);
 
 
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AppBar, Tabs, Tab, Toolbar, Typography } from '@mui/material';
 import logo from '../images/Logo5.png';
 import CustomizedMenus from './Dropdown.js';
@@ -6,7 +6,8 @@ import Headset from './Headset.js';
 import './Header.css';
 import { Link } from 'react-router-dom';
 import free from '../images/Icon-free.jpg';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+// import axios from 'axios';
 
 const collegeList = [
     'Rashtrasant Tukadoji Maharaj Nagpur University',
@@ -85,14 +86,16 @@ const collegeList = [
 ];
 
 function Header() {
+    const navigate = useNavigate();
     const [searchOption, setSearchOption] = useState('option1');
     const [searchCollege, setSearchCollege] = useState('');
     const [collegeSuggestions, setCollegeSuggestions] = useState([]);
-    const [propertyType, setPropertyType] = useState('Room'); // Added state for propertyType
+    const [propertyType, setPropertyType] = useState('room');
+    
 
     const handleSearchOptionChange = (e) => {
+        // Only update the propertyType when the value is changed
         setPropertyType(e.target.value);
-        setSearchOption(e.target.value);
         setSearchCollege('');
         setCollegeSuggestions([]);
     };
@@ -101,17 +104,11 @@ function Header() {
         const inputValue = e.target.value;
         setSearchCollege(inputValue);
 
-        // Update college suggestions based on input
         const filteredColleges = collegeList.filter((college) =>
             college.toLowerCase().includes(inputValue.toLowerCase())
         );
 
         setCollegeSuggestions(filteredColleges);
-    };
-
-    const handlePropertyTypeChange = (e) => {
-        const newPropertyType = e.target.value;
-        setPropertyType(newPropertyType);
     };
 
     const handleCollegeSelect = (selectedCollege) => {
@@ -120,31 +117,27 @@ function Header() {
     };
 
     const handleSearch = () => {
-        const searchData = {
-          searchOption,
-          searchCollege,
-          propertyType,
-        };
-      
-        console.log('Sending data to backend:', searchData);  // Add this line
-      
-        axios.post('http://localhost:5000/stay/search', searchData)
-          .then(response => {
-            // Handle the response from the backend
-            console.log('Backend response:', response.data);
-            // You can use the response data as needed
-            if (propertyType === 'Room') {
-              window.location.href = '/roomsresult';
-            } else {
-              window.location.href = '/hostelsresult';
-            }
-          })
-          .catch(error => {
-            // Handle errors
-            console.error('Error sending data to backend:', error);
-          });
-
+        if (propertyType === 'room') {
+            navigate('/roomsresult', { state: { searchOption, searchCollege } });
+        } else {
+            navigate('/hostelsresult', { state: { searchOption, searchCollege, propertyType} });
+        }
     };
+
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            const searchContainer = document.querySelector('.search-container');
+            if (searchContainer && !searchContainer.contains(e.target)) {
+                setCollegeSuggestions([]);
+            }
+        };
+
+        document.addEventListener('click', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, []);
 
     return (
         <>
@@ -162,21 +155,25 @@ function Header() {
                         </Typography>
                     </div>
                     <div className='marginleft'>
-                        <select className='Selecting' onChange={handlePropertyTypeChange}>
-                            <option value="Room">Rooms</option>
-                            <option value="Hostel">Hostels</option>
+                        <select className='Selecting' onChange={handleSearchOptionChange} value={propertyType}>
+                            <option value="room">Rooms</option>
+                            <option value="hostel">Hostels</option>
                         </select>
                     </div>
                     <div className='margin-spac'>
                         <div className="search-ba">
-                            <select className="select-optio" onChange={handleSearchOptionChange}>
+                            <select
+                                className="select-option"
+                                onChange={(e) => setSearchOption(e.target.value)}
+                                value={searchOption}
+                            >
                                 <option value="option1">College</option>
                                 <option value="option2">Area</option>
                             </select>
 
                             <div className="search-container">
                                 {searchOption === 'option1' ? (
-                                    <div className="search-input">
+                                    <div className="search-inpu">
                                         <input
                                             type="text"
                                             placeholder="Enter College Name"

@@ -104,8 +104,10 @@ function Landing() {
     const [searchOption, setSearchOption] = useState('option1');
     const [searchCollege, setSearchCollege] = useState('');
     const [collegeSuggestions, setCollegeSuggestions] = useState([]);
+    const [propertyType, setPropertyType] = useState('room');
 
     const handleSearchOptionChange = (e) => {
+        setPropertyType(e.target.value);
         setSearchOption(e.target.value);
         setSearchCollege('');
         setCollegeSuggestions([]);
@@ -129,7 +131,7 @@ function Landing() {
     };
     
     const handleSearch = () => {
-        navigate('/roomsresult', { state: { searchOption, searchCollege } });
+        navigate('/roomsresult', { state: { searchOption, searchCollege, propertyType } });
     };
     
 
