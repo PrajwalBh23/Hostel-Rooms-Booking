@@ -8,9 +8,11 @@ import Checkbox from '@mui/material/Checkbox';
 import house from '../images/House_sample.jpg'
 import map from '../images/map1.jpeg'
 import VerifiedRoundedIcon from '@mui/icons-material/VerifiedRounded';
+import { useNavigate } from 'react-router-dom';
 
 function Rooms() {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+    const navigate = useNavigate();
     const [roomData, setRoomData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -47,6 +49,11 @@ function Rooms() {
             ...prevFilters,
             [filterType]: prevFilters[filterType].includes(value) ? [] : [value],
         }));
+    };
+
+    const handleViewMore = (_id) => {
+        console.log(_id);
+        navigate(`/detail/${_id}`, { state: { _id } });
     };
 
     const handlePriceCheckboxChange = (priceRange) => {
@@ -251,7 +258,7 @@ function Rooms() {
                                         </div>
 
                                         <div className="corner">
-                                            <a href="/detail" className='noUnderline'>View More</a>
+                                        <p onClick={() => handleViewMore(room._id)} className='noUnderline'>View More</p>
                                         </div>
                                     </div>
                                 </div>

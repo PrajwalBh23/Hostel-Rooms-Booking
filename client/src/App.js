@@ -4,10 +4,10 @@ import { Route, Routes } from "react-router-dom";
 import Rooms from "./components/Rooms";
 import RoomsResult from "./components/Room_result";
 import HostelsResult from "./components/Hostel_result";
+import Form from "./components/Form.js";
+import Detail from "./components/Detail.js";
 import Hostel from "./components/Hostel";
 import Adding from "./components/Adding";
-import Form from "./components/Form";
-import Detail from "./components/Detail";
 import './App.css';
 
 function App() {
@@ -19,9 +19,9 @@ function App() {
         <Route path="/hostelsresult" element={<HostelsResult />} exact />
         <Route path="/rooms" element={<Rooms />} exact />
         <Route path="/hostels" element={<Hostel />} exact />
-        <Route path="/add" element={<Adding />} exact />
         <Route path="/form" element={<Form />} exact />
-        <Route path="/detail" element={<Detail />} exact />
+        <Route path="/detail/:id" element={<Detail />} exact />
+        <Route path="/add" element={<Adding />} exact />
       </Routes>
     </>
   );

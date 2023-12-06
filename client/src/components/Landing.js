@@ -107,11 +107,11 @@ function Landing() {
     const [propertyType, setPropertyType] = useState('room');
 
     const handleSearchOptionChange = (e) => {
-        setPropertyType(e.target.value);
+        setPropertyType(e.target.value);  // Set propertyType only
         setSearchOption(e.target.value);
         setSearchCollege('');
         setCollegeSuggestions([]);
-    };
+    };    
 
     const handleCollegeChange = (e) => {
         const inputValue = e.target.value;
@@ -131,8 +131,10 @@ function Landing() {
     };
     
     const handleSearch = () => {
+        handleSearchOptionChange({ target: { value: searchOption } });  // Ensure propertyType is set
+        console.log(`Here it is ${propertyType}`);
         navigate('/roomsresult', { state: { searchOption, searchCollege, propertyType } });
-    };
+    };    
     
 
     useEffect(() => {

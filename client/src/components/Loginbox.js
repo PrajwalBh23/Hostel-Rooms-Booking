@@ -68,7 +68,7 @@ const LoginDialog = ({ open, handleClose }) => {
     console.log('Logging in with:', email, password);
 
     // Make a POST request to the server
-    fetch('http://localhost:5000/auth/login', {
+    fetch('https://scholar-stay.onrender.com/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -82,6 +82,7 @@ const LoginDialog = ({ open, handleClose }) => {
         // Add logic to handle the response, e.g., update UI or show a message
         // You can check if the login was successful and then close the dialog
         login(data); // Assuming the login response includes user data
+        alert('Login successful');
         handleClose();
       })
       .catch((error) => {
@@ -92,7 +93,7 @@ const LoginDialog = ({ open, handleClose }) => {
   const handleRegister = async () => {
     try {
       // Make a POST request to the server
-      const response = await fetch('http://localhost:5000/auth/register', {
+      const response = await fetch('https://scholar-stay.onrender.com/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -111,6 +112,7 @@ const LoginDialog = ({ open, handleClose }) => {
       // Add logic to handle the response, e.g., update UI or show a message
       // You can check if the registration was successful and then close the dialog
       login(data); // Assuming the registration response includes user data
+      alert('Register successful');
       handleClose();
     } catch (error) {
       console.error('Error during registration:', error.message);

@@ -48,6 +48,7 @@ export const getAllRooms = async (req, res, next) => {
     }
 
     const formattedRooms = rooms.map(room => ({
+      _id: room._id,
       price: room.price,
       address: room.address,
       experience: room.experience,
@@ -115,6 +116,7 @@ export const getAllHostels = async (req, res, next) => {
     }
 
     const formattedHostels = hostels.map(hostel => ({
+      _id: hostel._id,
       price: hostel.price,
       address: hostel.address,
       experience: hostel.experience,
@@ -137,9 +139,6 @@ export const getAllHostels = async (req, res, next) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
-
-
 
 
 
@@ -227,21 +226,19 @@ export const getAllHostels = async (req, res, next) => {
 //   }
 // };
 
-let searchOption1;
-let searchColleges;
 
 export const Searching = async (req, res) => {
   try {
-    const { searchOption, searchCollege, getpropertyType } = req.query;
+    const { searchOption, searchCollege, propertyType } = req.query;
 
     let searchQuery = {};
     let filter;
 
-    console.log(searchOption);
-    console.log(searchCollege);
-    console.log(getpropertyType);
+    // console.log(`searchOption:-${searchOption}`);
+    // console.log(`searchCollege:- ${searchCollege}`);
+    // console.log(`Propertytype:- ${propertyType}`);
 
-    const propertyType = getpropertyType || 'room';
+    const setpropertyType = propertyType || 'room';
 
     // Check if searchCollege and searchOption are defined
     if (!searchCollege || !searchOption) {
@@ -261,7 +258,7 @@ export const Searching = async (req, res) => {
         ],
       };
     }
-    if (propertyType === 'room') {
+    if (setpropertyType === 'room') {
       filter = { owned: { $in: ['Room', 'Flat'] } };
     } else {
       filter = { owned: 'Hostel' };
@@ -276,9 +273,9 @@ export const Searching = async (req, res) => {
 
     let filteredResults;
 
-    if (propertyType === 'room' || propertyType === 'flat') {
+    if (setpropertyType === 'room' || setpropertyType === 'flat') {
       filteredResults = searchResults.filter(stay => filter.owned.$in.includes(stay.owned));
-    } else if (propertyType === 'hostel') {
+    } else if (setpropertyType === 'hostel') {
       filteredResults = searchResults.filter(stay => filter.owned === stay.owned);
     } else {
       return res.status(400).json({ message: "Invalid property type" });
@@ -344,6 +341,7 @@ export const Searching = async (req, res) => {
 
     const formattedSearchResults = finalResults.map(stay => ({
       // Map the properties you need for the frontend
+      _id: stay._id,
       price: stay.price,
       address: stay.address,
       experience: stay.experience,
@@ -365,12 +363,69 @@ export const Searching = async (req, res) => {
 };
 
 
+export const ViewMore = async (req, res) => {
+  try {
+    // Change this line in the backend code
+    const { id } = req.params;
+    console.log(`Received roomId : ${id}`);
 
+    const roomDetails = await Room.findById(id);
 
+    if (!roomDetails) {
+      return res.status(404).json({ message: 'Room not found' });
+    }
+    const {
+      name,
+      phone,
+      email,
+      experience,
+      owned,
+      address,
+      room,
+      price,
+      share,
+      sharing,
+      gender,
+      deposit,
+      rules,
+      config,
+      semiFurnished,
+      bill,
+      park,
+      college,
+      area,
+      fact,
+    } = roomDetails;
 
-
-
-
+    return res.status(200).json({
+      roomDetails: {
+        name,
+        phone,
+        email,
+        experience,
+        owned,
+        address,
+        room,
+        price,
+        share,
+        sharing,
+        gender,
+        deposit,
+        rules,
+        config,
+        semiFurnished,
+        bill,
+        park,
+        college,
+        area,
+        fact,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Internal Server Error' });
+  }
+}
 
 
 
@@ -412,6 +467,7 @@ export const addRooms = async (req, res) => {
   }
 };
 
+
 // export const updateRoom = async (req, res) => {
 
 //     try {
@@ -431,4 +487,3 @@ export const addRooms = async (req, res) => {
 //         res.status(500).json({error: error});
 //     }
 // }
-

@@ -82,7 +82,7 @@ function FormContainer() {
             formData6.verify = typeof formData6.verify === 'object' ? JSON.stringify(formData6.verify) : formData6.verify;
 
       try {
-        const response = await fetch('http://localhost:5000/stay', {
+        const response = await fetch('https://scholar-stay.onrender.com/stay', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -99,6 +99,7 @@ function FormContainer() {
 
         if (response.ok) {
           console.log('Form data saved successfully');
+          alert('Form data saved successfully');
           window.location.href = '/add';
         } else {
           console.error('Failed to save form data:', response.statusText);

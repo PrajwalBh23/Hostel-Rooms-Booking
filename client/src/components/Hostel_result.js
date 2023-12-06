@@ -8,7 +8,7 @@ import Checkbox from '@mui/material/Checkbox';
 import house from '../images/House_sample.jpg'
 import VerifiedRoundedIcon from '@mui/icons-material/VerifiedRounded';
 import map from '../images/map1.jpeg'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function HostelResults() {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -17,6 +17,7 @@ function HostelResults() {
     const [error, setError] = useState(null);
     const location = useLocation();
     const { searchOption, searchCollege, propertyType } = location.state;
+    const navigate = useNavigate();
     // const [backendSearchOptionValue, setBackendSearchOptionValue] = useState('');
     // const [backendSearchCollegeValue, setBackendSearchCollegeValue] = useState('');
     const [filters, setFilters] = useState({
@@ -27,7 +28,7 @@ function HostelResults() {
         price: [],
         hostelType: [], // Add this line to initialize hostelType as an empty array
     });
-    
+
 
     useEffect(() => {
         console.log(searchOption);
@@ -69,13 +70,19 @@ function HostelResults() {
             price: prevFilters.price === priceRange ? '' : priceRange,
         }));
     };
+
+    const handleViewMore = (_id) => {
+        console.log(_id);
+        navigate(`/detail/${_id}`, { state: { _id } });
+    };
+
     return (
         <>
             <Header />
             <div>
                 <Box display="flex" marginTop="7%" width="100%" flexDirection="row">
                     <Typography sx={{ fontFamily: "fantasy" }} width={"25%"}>
-                    <div className="filter">
+                        <div className="filter">
                             <div className="main">Filters</div>
                             <div className="contain">
                                 <div className="head">Hostel Type</div>
@@ -252,7 +259,7 @@ function HostelResults() {
                                         </div>
 
                                         <div className="corner">
-                                            <a href="/detail" className='noUnderline'>View More</a>
+                                            <p onClick={() => handleViewMore(hostel._id)} className='noUnderline'>View More</p>
                                         </div>
                                     </div>
                                 </div>
@@ -269,4 +276,3 @@ function HostelResults() {
 }
 
 export default HostelResults;
-

@@ -6,16 +6,17 @@ import Checkbox from '@mui/material/Checkbox';
 import house from '../images/House_sample.jpg'
 import map from '../images/map1.jpeg'
 import VerifiedRoundedIcon from '@mui/icons-material/VerifiedRounded';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 function RoomResults() {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+    const navigate = useNavigate();
     const [roomData, setRoomData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const location = useLocation();
-    const { searchOption, searchCollege, propertyType  } = location.state;
+    const { searchOption, searchCollege, propertyType } = location.state;
     // const [backendSearchOptionValue, setBackendSearchOptionValue] = useState('');
     // const [backendSearchCollegeValue, setBackendSearchCollegeValue] = useState('');
     const [filters, setFilters] = useState({
@@ -26,8 +27,9 @@ function RoomResults() {
         price: [],
     });
     useEffect(() => {
-        console.log(searchOption);
-        console.log(searchCollege);
+        // console.log(searchOption);
+        // console.log(searchCollege);
+        // console.log(propertyType);
 
         const fetchData = async () => {
             setLoading(true);
@@ -52,7 +54,10 @@ function RoomResults() {
         fetchData();
     }, [filters, searchCollege, searchOption, propertyType]);
 
-
+    const handleViewMore = (_id) => {
+        console.log(_id);
+        navigate(`/detail/${_id}`, { state: { _id } });
+    };
 
 
     const handleCheckboxChange = (filterType, value) => {
@@ -229,7 +234,7 @@ function RoomResults() {
                             roomData.map((room, index) => (
 
                                 <div key={index} className="result">
-
+                                    {console.log(`Here it is working ${room._id}`)}
 
                                     <div className="box">
                                         <img src={house} alt="not showing" />
@@ -264,7 +269,7 @@ function RoomResults() {
                                         </div>
 
                                         <div className="corner">
-                                            <a href="/detail" className='noUnderline'>View More</a>
+                                            <p onClick={() => handleViewMore(room._id)} className='noUnderline'>View More</p>
                                         </div>
                                     </div>
                                 </div>
