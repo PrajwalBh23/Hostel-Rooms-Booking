@@ -118,7 +118,7 @@ function Header() {
 
     const handleSearch = () => {
         if (propertyType === 'room') {
-            navigate('/roomsresult', { state: { searchOption, searchCollege } });
+            navigate('/roomsresult', { state: { searchOption, searchCollege, propertyType } });
         } else {
             navigate('/hostelsresult', { state: { searchOption, searchCollege, propertyType} });
         }
@@ -146,7 +146,7 @@ function Header() {
                     <div className='spacin'>
                         <Typography>
                             <Link to={"/"} className="logo-containe">
-                                <img src={logo} width={"128px"} alt="" />
+                                <img src={logo} width={"125px"} alt="" />
                                 <div className="logo-tex">
                                     <div className="logo-text-lin1">Scholar</div>
                                     <div className="logo-text-lin2">Stay</div>

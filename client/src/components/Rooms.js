@@ -21,7 +21,7 @@ function Rooms() {
         gender: [],
         semiFurnished: [],
         deposit: [],
-        price:[],
+        price: [],
     });
 
     useEffect(() => {
@@ -31,7 +31,7 @@ function Rooms() {
 
             try {
                 const queryParams = new URLSearchParams(filters);
-                const response = await axios.get(`http://localhost:5000/stay/rooms?${queryParams}`);
+                const response = await axios.get(`https://scholar-stay.onrender.com/stay/rooms?${queryParams}`);
                 const fetchedRooms = response.data.rooms;
                 setRoomData(fetchedRooms);
             } catch (error) {
@@ -212,12 +212,12 @@ function Rooms() {
                             </div>
                         </div>
                     </Typography>
-                    
+
                     <Typography sx={{ fontFamily: "fantasy" }} width={"75%"} variant="h2" height={'100%'}>
 
 
                         {loading ? (
-                            <div>Loading...</div>
+                            <div className='loading'>Loading...</div>
                         ) : error ? (
                             <div className="no-results">{error}</div>
                         ) : roomData.length === 0 ? (
@@ -258,7 +258,7 @@ function Rooms() {
                                         </div>
 
                                         <div className="corner">
-                                        <p onClick={() => handleViewMore(room._id)} className='noUnderline'>View More</p>
+                                            <p onClick={() => handleViewMore(room._id)} className='noUnderline'>Explore More</p>
                                         </div>
                                     </div>
                                 </div>

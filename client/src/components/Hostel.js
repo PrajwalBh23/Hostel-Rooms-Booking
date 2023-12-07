@@ -32,7 +32,7 @@ function Hostels() {
 
             try {
                 const queryParams = new URLSearchParams(filters);
-                const response = await axios.get(`http://localhost:5000/stay/hostels?${queryParams}`);
+                const response = await axios.get(`https://scholar-stay.onrender.com/stay/hostels?${queryParams}`);
                 const fetchedHostels = response.data.hostels;
                 setHostelData(fetchedHostels);
             } catch (error) {
@@ -207,7 +207,7 @@ function Hostels() {
                     </Typography>
                     <Typography sx={{ fontFamily: "fantasy" }} width={"75%"} variant="h2" height={'100%'}>
                         {loading ? (
-                            <div>Loading...</div>
+                            <div className='loading'>Loading...</div>
                         ) : error ? (
                             <div className="no-results">{error}</div>
                         ) : hostelData.length === 0 ? (
@@ -248,7 +248,7 @@ function Hostels() {
                                         </div>
 
                                         <div className="corner">
-                                        <p onClick={() => handleViewMore(hostel._id)} className='noUnderline'>View More</p>
+                                        <p onClick={() => handleViewMore(hostel._id)} className='noUnderline'>Explore More</p>
                                         </div>
                                     </div>
                                 </div>

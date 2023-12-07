@@ -24,7 +24,7 @@ export default function Detail() {
       setError(null);
 
       try {
-        const response = await axios.get(`http://localhost:5000/stay/detail/${id}`);
+        const response = await axios.get(`https://scholar-stay.onrender.com/stay/detail/${id}`);
         setRoomData(response.data.roomDetails);
       } catch (error) {
         setError('No Result Found');

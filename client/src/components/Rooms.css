@@ -100,8 +100,10 @@
 }
 
 .noUnderline {
-    text-decoration: none;
+    text-decoration: underline;
     margin-right: 50px;
+    margin-top: -10px;
+    padding-top: 3px;
 }
 
 .result img {
@@ -237,3 +239,4 @@
 .Setprop{
   padding-bottom: 30px;
 }
+

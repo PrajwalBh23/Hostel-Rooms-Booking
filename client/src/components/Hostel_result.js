@@ -12,12 +12,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 function HostelResults() {
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+    const navigate = useNavigate();
     const [hostelData, setHostelData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const location = useLocation();
     const { searchOption, searchCollege, propertyType } = location.state;
-    const navigate = useNavigate();
     // const [backendSearchOptionValue, setBackendSearchOptionValue] = useState('');
     // const [backendSearchCollegeValue, setBackendSearchCollegeValue] = useState('');
     const [filters, setFilters] = useState({
@@ -39,7 +39,7 @@ function HostelResults() {
             setError(null);
 
             try {
-                const response = await axios.get(`http://localhost:5000/stay/search?propertyType=${propertyType}&searchOption=${searchOption}&searchCollege=${searchCollege}`, {
+                const response = await axios.get(`https://scholar-stay.onrender.com/stay/search?propertyType=${propertyType}&searchOption=${searchOption}&searchCollege=${searchCollege}`, {
                     params: {
                         ...filters,
                     }
@@ -218,7 +218,7 @@ function HostelResults() {
                     </Typography>
                     <Typography sx={{ fontFamily: "fantasy" }} width={"75%"} variant="h2" height={'100%'}>
                         {loading ? (
-                            <div>Loading...</div>
+                            <div className='loading'>Loading...</div>
                         ) : error ? (
                             <div className="no-results">{error}</div>
                         ) : hostelData.length === 0 ? (
@@ -259,7 +259,7 @@ function HostelResults() {
                                         </div>
 
                                         <div className="corner">
-                                            <p onClick={() => handleViewMore(hostel._id)} className='noUnderline'>View More</p>
+                                            <p onClick={() => handleViewMore(hostel._id)} className='noUnderline'>Explore More</p>
                                         </div>
                                     </div>
                                 </div>

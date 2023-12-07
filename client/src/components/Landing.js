@@ -165,7 +165,7 @@ function Landing() {
         return (
             <div className="video-container" onClick={handleVideoClick}>
                 <ReactPlayer
-                    url="https://www.youtube.com/watch?v=zMR_NI7zISE"
+                    url="https://youtu.be/akW4gfYNHOo?si=HXx3YZB9wdbYPMhZ"
                     width="100%"
                     height="100%"
                     playing={playing}
@@ -267,8 +267,8 @@ function Landing() {
                     <img src={pg} alt="" style={{ marginTop: '0', height: '230px', width: '400px' }} />
                     <div class="desc-2">
                         <div className="text-2">
-                            <h1>Step into the extraordinary</h1>
-                            <h3>Our rooms are your gateway to unparalleled comfort , sit amet consectetur, adipisicing elit..</h3>
+                            <h1>An ideal hostel for students</h1>
+                            <h3>Our hostel are your gateway to unparalleled comfort , sit amet consectetur, adipisicing elit..</h3>
                             <button className="block-button">Explore Now</button>
                         </div>
                     </div>

@@ -36,7 +36,7 @@ function RoomResults() {
             setError(null);
 
             try {
-                const response = await axios.get(`http://localhost:5000/stay/search?propertyType=${propertyType}&searchOption=${searchOption}&searchCollege=${searchCollege}`, {
+                const response = await axios.get(`https://scholar-stay.onrender.com/stay/search?propertyType=${propertyType}&searchOption=${searchOption}&searchCollege=${searchCollege}`, {
                     params: {
                         ...filters,
                     }
@@ -225,7 +225,7 @@ function RoomResults() {
 
                     <Typography sx={{ fontFamily: "fantasy" }} width={"75%"} variant="h2" height={'100%'}>
                         {loading ? (
-                            <div>Loading...</div>
+                            <div className='loading'>Loading...</div>
                         ) : error ? (
                             <div className="no-results">{error}</div>
                         ) : !roomData || roomData.length === 0 ? (
@@ -269,7 +269,7 @@ function RoomResults() {
                                         </div>
 
                                         <div className="corner">
-                                            <p onClick={() => handleViewMore(room._id)} className='noUnderline'>View More</p>
+                                            <p onClick={() => handleViewMore(room._id)} className='noUnderline'>Explore More</p>
                                         </div>
                                     </div>
                                 </div>
